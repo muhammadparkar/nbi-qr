@@ -1,0 +1,94 @@
+"use client";
+
+import { useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+export default function Animations() {
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const mm = gsap.matchMedia();
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      // Hero entrance timeline
+      gsap
+        .timeline({ defaults: { ease: "power3.out" } })
+        .from(".hero-item", { y: 40, opacity: 0, duration: 0.8, stagger: 0.12 })
+        .from(
+          ".hero-badge",
+          { scale: 0.85, opacity: 0, rotation: -6, duration: 1, ease: "back.out(1.4)" },
+          "-=0.6"
+        );
+
+      // Floating brand badge (subtle idle motion)
+      gsap.to(".hero-badge", {
+        y: -14,
+        duration: 3,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        delay: 1.2,
+      });
+
+      // Parallax hero blobs
+      gsap.utils.toArray<Element>(".hero-blob").forEach((blob, i) => {
+        gsap.to(blob, {
+          y: i % 2 ? 80 : -80,
+          scrollTrigger: { trigger: "#top", start: "top top", end: "bottom top", scrub: 1 },
+        });
+      });
+
+      // Stat counters
+      gsap.utils.toArray<HTMLElement>(".stat").forEach((el) => {
+        const target = Number(el.dataset.count);
+        const suffix = el.dataset.suffix || "";
+        const obj = { n: 0 };
+        gsap.to(obj, {
+          n: target,
+          duration: 1.6,
+          ease: "power2.out",
+          delay: 0.6,
+          onUpdate: () => {
+            el.textContent = Math.round(obj.n) + suffix;
+          },
+        });
+      });
+
+      // Marquee (two identical tracks rendered; shift half the strip for a seamless loop)
+      gsap.to("#marquee", { xPercent: -50, duration: 26, ease: "none", repeat: -1 });
+
+      // Scroll reveals (staggered per section batch)
+      ScrollTrigger.batch(".reveal", {
+        start: "top 85%",
+        once: true,
+        onEnter: (batch) =>
+          gsap.fromTo(
+            batch,
+            { y: 36, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.12 }
+          ),
+      });
+      gsap.set(".reveal", { opacity: 0 });
+      ScrollTrigger.refresh();
+
+      // Section headline drift
+      gsap.utils.toArray<Element>("section h2").forEach((h) => {
+        gsap.from(h, {
+          x: -24,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: { trigger: h, start: "top 88%", once: true },
+        });
+      });
+    });
+
+    mm.add("(prefers-reduced-motion: reduce)", () => {
+      gsap.set(".reveal, .hero-item, .hero-badge, section h2", { clearProps: "all", opacity: 1 });
+    });
+
+    return () => mm.revert();
+  }, []);
+
+  return null;
+}
