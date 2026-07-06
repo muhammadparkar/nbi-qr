@@ -102,29 +102,33 @@ const productCategories = [
 const journeySteps = [
   {
     n: "01",
+    kicker: "It begins in the field",
     title: "Sourced",
-    body: "Hand-picked harvests from trusted farmers across the Anuradhapura District — selected, not just collected.",
+    body: "Hand-picked harvests from trusted farmers across the Anuradhapura District — selected, not just collected. A farmer's handshake still opens every season.",
     img: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&q=70",
     imgAlt: "Farmers shaking hands in a harvest field",
   },
   {
     n: "02",
+    kicker: "Then the island sun works",
     title: "Dried & Roasted",
-    body: "Traditional sun-drying meets controlled roasting profiles — the deep color you see is earned, not dyed.",
+    body: "Traditional sun-drying meets controlled roasting profiles — the deep color you see is earned, not dyed. Patience is the first ingredient.",
     img: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=800&q=70",
     imgAlt: "Red chillies laid out for drying",
   },
   {
     n: "03",
+    kicker: "Within hours, the mill turns",
     title: "Milled Fresh",
-    body: "Ground in small batches under strict hygiene control, so the aroma goes into the pack — not into the air.",
+    body: "Ground in small batches under strict hygiene control, so the aroma goes into the pack — not into the air. Freshness is a schedule, not a slogan.",
     img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70",
     imgAlt: "Freshly milled spice powders in spoons",
   },
   {
     n: "04",
+    kicker: "And the gates open",
     title: "Sealed & Shipped",
-    body: "Export-grade packing with bilingual labelling — from Negama's gates to Gulf shelves, flavor intact.",
+    body: "Export-grade packing with bilingual labelling — from Negama's gates to Gulf shelves, flavor intact. The island travels well.",
     img: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=800&q=70",
     imgAlt: "Shipping containers at an export port",
   },
@@ -518,28 +522,50 @@ export default function Home() {
               Most spice loses its soul between harvest and shelf. Ours doesn&apos;t get the chance.
             </p>
           </div>
-          <ol className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {journeySteps.map((step) => (
-              <li key={step.n} className="reveal group relative rounded-2xl bg-white border border-gray-200 overflow-hidden">
-                <div className="relative h-36 overflow-hidden">
-                  <Image
-                    src={step.img}
-                    alt={step.imgAlt}
-                    fill
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04]"
-                  />
-                  <span className="absolute bottom-2 right-3 text-4xl font-extrabold text-white/80 drop-shadow" aria-hidden="true">
+          <div className="relative mt-16">
+            {/* timeline spine */}
+            <div
+              className="journey-line hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-nbigreen/30"
+              aria-hidden="true"
+            />
+            <ol className="space-y-16 md:space-y-24">
+              {journeySteps.map((step, i) => (
+                <li key={step.n} className="reveal relative grid md:grid-cols-2 items-center gap-6 md:gap-20">
+                  <div
+                    className={`group relative h-52 sm:h-64 rounded-3xl overflow-hidden border border-gray-200 shadow-sm ${
+                      i % 2 ? "md:order-2" : ""
+                    }`}
+                  >
+                    <Image
+                      src={step.img}
+                      alt={step.imgAlt}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04]"
+                    />
+                    <span
+                      className="md:hidden absolute bottom-2 right-4 text-5xl font-extrabold text-white/80 drop-shadow"
+                      aria-hidden="true"
+                    >
+                      {step.n}
+                    </span>
+                  </div>
+                  <div className={i % 2 ? "md:order-1 md:text-right" : ""}>
+                    <p className="font-serif italic text-nbired">{step.kicker}</p>
+                    <h3 className="mt-2 text-2xl md:text-3xl font-extrabold tracking-tight">{step.title}</h3>
+                    <p className="mt-3 text-base leading-relaxed text-nbicocoa/90 max-w-md md:inline-block">{step.body}</p>
+                  </div>
+                  {/* spine marker */}
+                  <span
+                    className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 items-center justify-center rounded-full bg-nbigreen text-white text-sm font-extrabold border-4 border-[#FBFAF7] shadow"
+                    aria-hidden="true"
+                  >
                     {step.n}
                   </span>
-                </div>
-                <div className="p-6 pt-4">
-                  <h3 className="font-extrabold text-lg">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-nbicocoa/90">{step.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </section>
 

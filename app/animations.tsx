@@ -60,6 +60,18 @@ export default function Animations() {
       gsap.set(".reveal", { opacity: 0 });
       ScrollTrigger.refresh();
 
+      // Journey timeline spine draws in as the story scrolls
+      gsap.fromTo(
+        ".journey-line",
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          transformOrigin: "top center",
+          ease: "none",
+          scrollTrigger: { trigger: "#journey", start: "top 60%", end: "bottom 85%", scrub: 1 },
+        }
+      );
+
       // Section headline drift
       gsap.utils.toArray<Element>("section h2").forEach((h) => {
         gsap.from(h, {
