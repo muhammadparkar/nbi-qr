@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export type Slide = { src: StaticImageData | string; alt: string };
 
-const INTERVAL = 5000;
+const INTERVAL = 2500;
 
 export default function HeroSlider({ slides }: { slides: Slide[] }) {
   const [active, setActive] = useState(0);
@@ -27,7 +27,7 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
           sizes="100vw"
           priority={i === 0}
           placeholder={typeof s.src === "string" ? undefined : "blur"}
-          className={`object-cover object-center transition-opacity duration-1000 ease-in-out ${
+          className={`object-cover object-center transition-opacity duration-700 ease-in-out ${
             i === active ? "opacity-100" : "opacity-0"
           }`}
         />

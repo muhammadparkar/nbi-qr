@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { PRELOADER_REVEAL } from "./preloader";
 
 export default function Animations() {
   useEffect(() => {
@@ -10,10 +11,43 @@ export default function Animations() {
     const mm = gsap.matchMedia();
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      // Hero entrance timeline
+      // Hero entrance — timed to start as the preloader wipe reveals the page.
+      // Content is never pre-hidden: if the intro doesn't run, the hero is simply visible.
       gsap
-        .timeline({ defaults: { ease: "power3.out" } })
-        .from(".hero-item", { y: 40, opacity: 0, duration: 0.8, stagger: 0.12 });
+        .timeline({ defaults: { ease: "power3.out" }, delay: PRELOADER_REVEAL })
+        .fromTo(".hero-item", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.12 })
+        .fromTo(
+          ".hero-badge",
+          { y: 30, opacity: 0, scale: 0.95 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: "power3.out" },
+          "-=0.5"
+        );
+
+      // Card stack idle float
+      gsap.to(".hero-badge", {
+        y: -10,
+        duration: 3.2,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        delay: PRELOADER_REVEAL + 1.6,
+      });
+
+      // Stat counters
+      gsap.utils.toArray<HTMLElement>(".stat").forEach((el) => {
+        const target = Number(el.dataset.count);
+        const suffix = el.dataset.suffix || "";
+        const obj = { n: 0 };
+        gsap.to(obj, {
+          n: target,
+          duration: 1.6,
+          ease: "power2.out",
+          delay: PRELOADER_REVEAL + 0.6,
+          onUpdate: () => {
+            el.textContent = Math.round(obj.n) + suffix;
+          },
+        });
+      });
 
       // Parallax hero background (scaled up so the shift never exposes edges)
       gsap.fromTo(
@@ -26,22 +60,6 @@ export default function Animations() {
           scrollTrigger: { trigger: "#top", start: "top top", end: "bottom top", scrub: 1 },
         }
       );
-
-      // Stat counters
-      gsap.utils.toArray<HTMLElement>(".stat").forEach((el) => {
-        const target = Number(el.dataset.count);
-        const suffix = el.dataset.suffix || "";
-        const obj = { n: 0 };
-        gsap.to(obj, {
-          n: target,
-          duration: 1.6,
-          ease: "power2.out",
-          delay: 0.6,
-          onUpdate: () => {
-            el.textContent = Math.round(obj.n) + suffix;
-          },
-        });
-      });
 
       // Marquee (two identical tracks rendered; shift half the strip for a seamless loop)
       gsap.to("#marquee", { xPercent: -50, duration: 26, ease: "none", repeat: -1 });

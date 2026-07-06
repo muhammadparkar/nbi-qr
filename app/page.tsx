@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Animations from "./animations";
+import Preloader from "./preloader";
 import ContactForm from "./contact-form";
 import MobileMenu from "./mobile-menu";
 import HeroSlider, { type Slide } from "./hero-slider";
-import FloatingProducts, { type FloatingItem } from "./floating-products";
 import heroRange from "@/public/products/hero-range.jpeg";
 import spiceRange from "@/public/products/spice-range.jpeg";
 import ceylonPack from "@/public/products/ceylon-mixture-pack.jpeg";
@@ -157,45 +157,6 @@ const heroSlides: Slide[] = [
   },
 ];
 
-// Scattered hero cards; depth = mouse-parallax strength. Bottom cards hidden on mobile to protect stats.
-const floatingItems: FloatingItem[] = [
-  {
-    src: ceylonPack,
-    alt: "Ceylon Mixture pack",
-    depth: 1.5,
-    className: "hidden sm:block left-[6%] top-[20%]",
-    cardClassName: "w-36 lg:w-44 aspect-[3/4] rotate-[-8deg]",
-  },
-  {
-    src: spiceRange,
-    alt: "NBI spice range packs",
-    depth: 2.5,
-    className: "hidden sm:block right-[5%] top-[16%]",
-    cardClassName: "w-44 lg:w-56 aspect-[4/3] rotate-[6deg]",
-  },
-  {
-    src: ceylonPouches,
-    alt: "Ceylon Mixture kraft pouches",
-    depth: 4,
-    className: "hidden md:block left-[9%] bottom-[14%]",
-    cardClassName: "w-36 lg:w-44 aspect-square rotate-[5deg]",
-  },
-  {
-    src: ceylonShelf,
-    alt: "Ceylon Mixture pouches on shelf",
-    depth: 1,
-    className: "hidden md:block right-[7%] bottom-[12%]",
-    cardClassName: "w-40 lg:w-52 aspect-[4/3] rotate-[-6deg]",
-  },
-  {
-    src: heroRange,
-    alt: "NBI spice lineup",
-    depth: 3,
-    className: "hidden lg:block left-[1%] top-[55%]",
-    cardClassName: "w-28 aspect-[4/3] rotate-[10deg]",
-  },
-];
-
 const navLinks = [
   { href: "#about", label: "About" },
   { href: "#products", label: "Products" },
@@ -207,6 +168,7 @@ const navLinks = [
 export default function Home() {
   return (
     <>
+      <Preloader />
       <Animations />
 
       {/* ============ NAVBAR ============ */}
@@ -250,70 +212,97 @@ export default function Home() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,57,32,0.75)_100%)]" />
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-nbidark to-transparent" />
         </div>
-        <FloatingProducts items={floatingItems} />
         <div className="relative mx-auto max-w-6xl px-5 pt-28 pb-16 sm:pt-36 md:pt-44 md:pb-28">
-          <div className="flex flex-col items-center text-center">
-            <h1 className="hero-item font-extrabold tracking-tight text-4xl sm:text-5xl lg:text-7xl leading-[1.02]">
-              The Island&apos;s Flavor,
-              <br />
-              <span className="font-serif italic font-medium" style={{ color: "#FF5A4C" }}>
-                Ground at the Source.
-              </span>
-            </h1>
-            <p className="hero-item mt-6 font-serif text-lg md:text-xl text-nbicream/90 max-w-2xl leading-relaxed">
-              Since 1987, New Badriya Industries has milled Sri Lanka&apos;s boldest harvests — and sealed that aroma into
-              every pack that leaves our gates.
-            </p>
+          <div className="grid md:grid-cols-12 gap-14 md:gap-10 items-center">
+            <div className="md:col-span-7 flex flex-col items-center text-center md:items-start md:text-left">
+              <h1 className="hero-item font-extrabold tracking-tight text-4xl sm:text-5xl lg:text-6xl leading-[1.02]">
+                The Island&apos;s Flavor,
+                <br />
+                <span className="font-serif italic font-medium" style={{ color: "#FF5A4C" }}>
+                  Ground at the Source.
+                </span>
+              </h1>
+              <p className="hero-item mt-6 font-serif text-lg md:text-xl text-nbicream/90 max-w-xl leading-relaxed">
+                Since 1987, New Badriya Industries has milled Sri Lanka&apos;s boldest harvests — and sealed that aroma
+                into every pack that leaves our gates.
+              </p>
 
-            {/* Mobile-only product strip (floating cards hidden below sm) */}
-            <div className="hero-item sm:hidden mt-8 flex items-center justify-center -space-x-4">
-              <div className="relative w-24 aspect-[3/4] rotate-[-8deg] rounded-xl overflow-hidden border border-white/20 shadow-xl">
-                <Image src={spiceRange} alt="NBI spice powder packs" fill sizes="6rem" placeholder="blur" className="object-cover" />
+              <div className="hero-item mt-8 sm:mt-10 flex flex-col sm:flex-row w-full sm:w-auto justify-center md:justify-start gap-3 sm:gap-4">
+                <a
+                  href="#products"
+                  className="press inline-flex items-center justify-center gap-2 rounded-full bg-nbired px-7 py-3.5 font-bold text-white hover:bg-[#b82217] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                >
+                  Explore Our Spices
+                  <ArrowIcon />
+                </a>
+                <a
+                  href="#export"
+                  className="press inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 backdrop-blur px-7 py-3.5 font-bold text-white hover:bg-white/20 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                >
+                  Export Partnerships
+                </a>
               </div>
-              <div className="relative z-10 w-28 aspect-[3/4] rounded-xl overflow-hidden border border-white/25 shadow-xl">
-                <Image src={ceylonPack} alt="NBI Ceylon Mixture pack" fill sizes="7rem" placeholder="blur" className="object-cover object-[20%_center]" />
-              </div>
-              <div className="relative w-24 aspect-[3/4] rotate-[8deg] rounded-xl overflow-hidden border border-white/20 shadow-xl">
-                <Image src={ceylonPouches} alt="NBI Ceylon Mixture kraft pouches" fill sizes="6rem" placeholder="blur" className="object-cover" />
-              </div>
+
+              <dl className="hero-item mt-12 grid grid-cols-3 gap-8 sm:gap-14">
+                <div>
+                  <dt className="stat text-3xl sm:text-4xl font-extrabold" data-count="35" data-suffix="+">
+                    35+
+                  </dt>
+                  <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Years of craft</dd>
+                </div>
+                <div>
+                  <dt className="stat text-3xl sm:text-4xl font-extrabold" data-count="17" data-suffix="+">
+                    17+
+                  </dt>
+                  <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Product lines</dd>
+                </div>
+                <div>
+                  <dt className="stat text-3xl sm:text-4xl font-extrabold" data-count="100" data-suffix="%">
+                    100%
+                  </dt>
+                  <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Sri Lankan sourced</dd>
+                </div>
+              </dl>
             </div>
 
-            <div className="hero-item mt-8 sm:mt-10 flex flex-col sm:flex-row w-full sm:w-auto justify-center gap-3 sm:gap-4">
-              <a
-                href="#products"
-                className="press inline-flex items-center justify-center gap-2 rounded-full bg-nbired px-7 py-3.5 font-bold text-white hover:bg-[#b82217] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              >
-                Explore Our Spices
-                <ArrowIcon />
-              </a>
-              <a
-                href="#export"
-                className="press inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 backdrop-blur px-7 py-3.5 font-bold text-white hover:bg-white/20 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              >
-                Export Partnerships
-              </a>
+            {/* Layered product cards */}
+            <div className="md:col-span-5 hero-badge relative mx-auto w-full max-w-sm mt-8 md:mt-0">
+              <div className="relative ml-10 sm:ml-14 aspect-[4/5] rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
+                <Image
+                  src={ceylonShelf}
+                  alt="NBI Ceylon Mixture kraft pouches on a shelf"
+                  fill
+                  sizes="(min-width: 768px) 24rem, 90vw"
+                  placeholder="blur"
+                  priority
+                  className="object-cover"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent px-5 pt-20 pb-5">
+                  <p className="text-[11px] font-bold tracking-[0.3em] uppercase text-nbicream/80">Signature</p>
+                  <p className="mt-1 text-2xl font-extrabold tracking-tight text-white">Ceylon Mixture</p>
+                </div>
+              </div>
+              <div className="absolute -top-6 left-0 w-28 sm:w-36 aspect-square rounded-2xl overflow-hidden border border-white/20 shadow-2xl rotate-[-5deg]">
+                <Image
+                  src={spiceRange}
+                  alt="NBI spice powder packs"
+                  fill
+                  sizes="9rem"
+                  placeholder="blur"
+                  className="object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-6 left-2 w-32 sm:w-40 aspect-[4/3] rounded-2xl overflow-hidden border border-white/20 shadow-2xl rotate-[4deg]">
+                <Image
+                  src={heroRange}
+                  alt="NBI spice range lineup"
+                  fill
+                  sizes="10rem"
+                  placeholder="blur"
+                  className="object-cover"
+                />
+              </div>
             </div>
-
-            <dl className="hero-item mt-12 grid grid-cols-3 gap-8 sm:gap-14">
-              <div>
-                <dt className="stat text-3xl sm:text-4xl font-extrabold" data-count="35" data-suffix="+">
-                  35+
-                </dt>
-                <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Years of craft</dd>
-              </div>
-              <div>
-                <dt className="stat text-3xl sm:text-4xl font-extrabold" data-count="17" data-suffix="+">
-                  17+
-                </dt>
-                <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Product lines</dd>
-              </div>
-              <div>
-                <dt className="stat text-3xl sm:text-4xl font-extrabold" data-count="100" data-suffix="%">
-                  100%
-                </dt>
-                <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Sri Lankan sourced</dd>
-              </div>
-            </dl>
           </div>
         </div>
         {/* wave divider */}
@@ -746,17 +735,6 @@ export default function Home() {
           <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-3 text-xs text-nbicream/60">
             <p>© 2026 New Badriya Industries (PVT) LTD. All rights reserved.</p>
             <p>Founded by A.H. Salahudeen · Negama, Anuradhapura District, Sri Lanka</p>
-            <p>
-              Designed and developed by{" "}
-              <a
-                href="https://qadmastechnologies.com/"
-                target="_blank"
-                rel="noopener"
-                className="font-semibold text-nbicream/80 hover:text-white underline decoration-nbicream/30 underline-offset-2 hover:decoration-white transition-colors duration-200 cursor-pointer"
-              >
-                Qadmas Technologies
-              </a>
-            </p>
           </div>
         </div>
       </footer>
