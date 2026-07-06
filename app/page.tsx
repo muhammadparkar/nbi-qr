@@ -2,6 +2,8 @@ import Image from "next/image";
 import Animations from "./animations";
 import ContactForm from "./contact-form";
 import MobileMenu from "./mobile-menu";
+import HeroSlider, { type Slide } from "./hero-slider";
+import FloatingProducts, { type FloatingItem } from "./floating-products";
 import heroRange from "@/public/products/hero-range.jpeg";
 import spiceRange from "@/public/products/spice-range.jpeg";
 import ceylonPack from "@/public/products/ceylon-mixture-pack.jpeg";
@@ -60,71 +62,71 @@ const marqueeItems = [
   "Since 1987",
 ];
 
+// ponytail: placeholder photos reused across categories for client preview — swap per-category shots later
 const productCategories = [
   {
     name: "Curry & Chili",
     accent: "red",
     note: "Deep roast, slow island burn.",
     items: ["Curry Powder", "Roasted Curry Powder", "Chili Powder", "Fish Curry Mix"],
-    icon: (
-      <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" />
-    ),
+    img: heroRange,
+    imgAlt: "NBI chilli and curry powder packs",
   },
   {
     name: "Pure Powders",
     accent: "green",
     note: "One origin. Nothing else added.",
     items: ["Black & White Pepper", "Turmeric Powder", "Coriander · Cumin", "Fennel Powder"],
-    icon: (
-      <>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636" />
-        <circle cx="12" cy="12" r="3.5" />
-      </>
-    ),
+    img: spiceRange,
+    imgAlt: "NBI single-origin spice powder packs",
   },
   {
     name: "Masala Blends",
     accent: "red",
     note: "Blended like a family recipe.",
     items: ["Mixed & Garam Masala", "Meat Masala", "Chicken Masala", "Custom Spice Blends"],
-    icon: (
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
-    ),
+    img: ceylonPouches,
+    imgAlt: "NBI masala blend pouches",
   },
   {
     name: "Signature Ceylon",
     accent: "green",
     note: "The name Ceylon earned.",
     items: ["Ceylon Cinnamon", "Ceylon Tea", "Customized Packaging", "Private Label Options"],
-    icon: (
-      <>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a8.25 8.25 0 0 0 8.25-8.25c0-4.556-3.694-8.25-8.25-11.25C7.444 4.5 3.75 8.194 3.75 12.75A8.25 8.25 0 0 0 12 21Z" />
-        <path strokeLinecap="round" d="M12 21V9" />
-      </>
-    ),
+    img: ceylonShelf,
+    imgAlt: "NBI signature Ceylon product pouches on a shelf",
   },
 ];
 
+// ponytail: Unsplash stock as preview filler — replace with real NBI farm/factory photos
 const journeySteps = [
   {
     n: "01",
     title: "Sourced",
     body: "Hand-picked harvests from trusted farmers across the Anuradhapura District — selected, not just collected.",
+    img: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&q=70",
+    imgAlt: "Farmers shaking hands in a harvest field",
   },
   {
     n: "02",
     title: "Dried & Roasted",
     body: "Traditional sun-drying meets controlled roasting profiles — the deep color you see is earned, not dyed.",
+    img: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=800&q=70",
+    imgAlt: "Red chillies laid out for drying",
   },
   {
     n: "03",
     title: "Milled Fresh",
     body: "Ground in small batches under strict hygiene control, so the aroma goes into the pack — not into the air.",
+    img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70",
+    imgAlt: "Freshly milled spice powders in spoons",
   },
   {
     n: "04",
     title: "Sealed & Shipped",
     body: "Export-grade packing with bilingual labelling — from Negama's gates to Gulf shelves, flavor intact.",
+    img: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=800&q=70",
+    imgAlt: "Shipping containers at an export port",
   },
 ];
 
@@ -136,6 +138,58 @@ const coreValues = [
   "Sustainability",
   "Food Safety",
   "Continuous Improvement",
+];
+
+// ponytail: Unsplash stock as preview filler — replace with NBI factory/product photography
+const heroSlides: Slide[] = [
+  { src: heroRange, alt: "NBI spice range packs" },
+  {
+    src: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=1920&q=75",
+    alt: "Assorted Sri Lankan spices in wooden spoons",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=1920&q=75",
+    alt: "Colorful spice powders in bowls",
+  },
+];
+
+// Scattered hero cards; depth = mouse-parallax strength. Bottom cards hidden on mobile to protect stats.
+const floatingItems: FloatingItem[] = [
+  {
+    src: ceylonPack,
+    alt: "Ceylon Mixture pack",
+    depth: 1.5,
+    className: "hidden sm:block left-[6%] top-[20%]",
+    cardClassName: "w-36 lg:w-44 aspect-[3/4] rotate-[-8deg]",
+  },
+  {
+    src: spiceRange,
+    alt: "NBI spice range packs",
+    depth: 2.5,
+    className: "hidden sm:block right-[5%] top-[16%]",
+    cardClassName: "w-44 lg:w-56 aspect-[4/3] rotate-[6deg]",
+  },
+  {
+    src: ceylonPouches,
+    alt: "Ceylon Mixture kraft pouches",
+    depth: 4,
+    className: "hidden md:block left-[9%] bottom-[14%]",
+    cardClassName: "w-36 lg:w-44 aspect-square rotate-[5deg]",
+  },
+  {
+    src: ceylonShelf,
+    alt: "Ceylon Mixture pouches on shelf",
+    depth: 1,
+    className: "hidden md:block right-[7%] bottom-[12%]",
+    cardClassName: "w-40 lg:w-52 aspect-[4/3] rotate-[-6deg]",
+  },
+  {
+    src: heroRange,
+    alt: "NBI spice lineup",
+    depth: 3,
+    className: "hidden lg:block left-[1%] top-[55%]",
+    cardClassName: "w-28 aspect-[4/3] rotate-[10deg]",
+  },
 ];
 
 const navLinks = [
@@ -187,78 +241,75 @@ export default function Home() {
       {/* ============ HERO ============ */}
       <section id="top" className="relative overflow-hidden bg-nbidark text-white">
         <div className="absolute inset-0" aria-hidden="true">
-          <div className="hero-blob absolute -top-32 -right-32 w-[34rem] h-[34rem] rounded-full bg-nbigreen/25 blur-3xl" />
-          <div className="hero-blob absolute -bottom-40 -left-24 w-[28rem] h-[28rem] rounded-full bg-nbired/20 blur-3xl" />
+          <HeroSlider slides={heroSlides} />
+          <div className="absolute inset-0 bg-nbidark/55" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,57,32,0.75)_100%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-nbidark to-transparent" />
         </div>
-        <div className="relative mx-auto max-w-6xl px-5 pt-32 pb-16 sm:pt-36 md:pt-48 md:pb-32">
-          <div className="grid md:grid-cols-12 gap-12 items-center">
-            <div className="md:col-span-7">
-              <p className="hero-item inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold tracking-[0.18em] uppercase text-nbicream">
-                <DotsMark className="w-3.5 h-3.5" />
-                Est. 1987 · Negama, Anuradhapura, Sri Lanka
-              </p>
-              <h1 className="hero-item mt-6 font-extrabold tracking-tight text-4xl sm:text-5xl lg:text-6xl leading-[1.05]">
-                The Island&apos;s Flavor,
-                <br />
-                <span className="font-serif italic font-medium" style={{ color: "#FF5A4C" }}>
-                  Ground at the Source.
-                </span>
-              </h1>
-              <p className="hero-item mt-6 font-serif text-lg md:text-xl text-nbicream/90 max-w-xl leading-relaxed">
-                Since 1987, New Badriya Industries has milled Sri Lanka&apos;s boldest harvests in Negama, Anuradhapura — and
-                sealed that aroma into every pack that leaves our gates. If it doesn&apos;t smell like the island, it
-                doesn&apos;t ship.
-              </p>
-              <div className="hero-item mt-9 flex flex-wrap gap-4">
-                <a
-                  href="#products"
-                  className="press inline-flex items-center gap-2 rounded-xl bg-nbired px-6 py-3.5 font-bold text-white hover:bg-[#b82217] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                >
-                  Explore Our Spices
-                  <ArrowIcon />
-                </a>
-                <a
-                  href="#export"
-                  className="press inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/5 px-6 py-3.5 font-bold text-white hover:bg-white/15 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                >
-                  Export Partnerships
-                </a>
+        <FloatingProducts items={floatingItems} />
+        <div className="relative mx-auto max-w-6xl px-5 pt-28 pb-16 sm:pt-36 md:pt-44 md:pb-28">
+          <div className="flex flex-col items-center text-center">
+            <h1 className="hero-item font-extrabold tracking-tight text-4xl sm:text-5xl lg:text-7xl leading-[1.02]">
+              The Island&apos;s Flavor,
+              <br />
+              <span className="font-serif italic font-medium" style={{ color: "#FF5A4C" }}>
+                Ground at the Source.
+              </span>
+            </h1>
+            <p className="hero-item mt-6 font-serif text-lg md:text-xl text-nbicream/90 max-w-2xl leading-relaxed">
+              Since 1987, New Badriya Industries has milled Sri Lanka&apos;s boldest harvests — and sealed that aroma into
+              every pack that leaves our gates.
+            </p>
+
+            {/* Mobile-only product strip (floating cards hidden below sm) */}
+            <div className="hero-item sm:hidden mt-8 flex items-center justify-center -space-x-4">
+              <div className="relative w-24 aspect-[3/4] rotate-[-8deg] rounded-xl overflow-hidden border border-white/20 shadow-xl">
+                <Image src={spiceRange} alt="NBI spice powder packs" fill sizes="6rem" placeholder="blur" className="object-cover" />
               </div>
-              <dl className="hero-item mt-10 grid grid-cols-3 gap-6 max-w-md">
-                <div>
-                  <dt className="stat text-3xl font-extrabold" data-count="35" data-suffix="+">
-                    35+
-                  </dt>
-                  <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Years of craft</dd>
-                </div>
-                <div>
-                  <dt className="stat text-3xl font-extrabold" data-count="17" data-suffix="+">
-                    17+
-                  </dt>
-                  <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Product lines</dd>
-                </div>
-                <div>
-                  <dt className="stat text-3xl font-extrabold" data-count="100" data-suffix="%">
-                    100%
-                  </dt>
-                  <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Sri Lankan sourced</dd>
-                </div>
-              </dl>
-            </div>
-            <div className="md:col-span-5">
-              <div className="hero-badge relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
-                <Image
-                  src={heroRange}
-                  alt="NBI spice range — cumin, curry, turmeric, chilli, black pepper, coriander and Kashmiri chilli powder packs"
-                  className="w-full h-auto object-cover"
-                  placeholder="blur"
-                  priority
-                />
-                <div className="absolute bottom-3 left-3 rounded-lg bg-nbidark/80 backdrop-blur px-3 py-1.5 text-xs font-bold tracking-wide text-nbicream">
-                  The NBI Spice Range
-                </div>
+              <div className="relative z-10 w-28 aspect-[3/4] rounded-xl overflow-hidden border border-white/25 shadow-xl">
+                <Image src={ceylonPack} alt="NBI Ceylon Mixture pack" fill sizes="7rem" placeholder="blur" className="object-cover object-[20%_center]" />
+              </div>
+              <div className="relative w-24 aspect-[3/4] rotate-[8deg] rounded-xl overflow-hidden border border-white/20 shadow-xl">
+                <Image src={ceylonPouches} alt="NBI Ceylon Mixture kraft pouches" fill sizes="6rem" placeholder="blur" className="object-cover" />
               </div>
             </div>
+
+            <div className="hero-item mt-8 sm:mt-10 flex flex-col sm:flex-row w-full sm:w-auto justify-center gap-3 sm:gap-4">
+              <a
+                href="#products"
+                className="press inline-flex items-center justify-center gap-2 rounded-full bg-nbired px-7 py-3.5 font-bold text-white hover:bg-[#b82217] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                Explore Our Spices
+                <ArrowIcon />
+              </a>
+              <a
+                href="#export"
+                className="press inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 backdrop-blur px-7 py-3.5 font-bold text-white hover:bg-white/20 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                Export Partnerships
+              </a>
+            </div>
+
+            <dl className="hero-item mt-12 grid grid-cols-3 gap-8 sm:gap-14">
+              <div>
+                <dt className="stat text-3xl sm:text-4xl font-extrabold" data-count="35" data-suffix="+">
+                  35+
+                </dt>
+                <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Years of craft</dd>
+              </div>
+              <div>
+                <dt className="stat text-3xl sm:text-4xl font-extrabold" data-count="17" data-suffix="+">
+                  17+
+                </dt>
+                <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Product lines</dd>
+              </div>
+              <div>
+                <dt className="stat text-3xl sm:text-4xl font-extrabold" data-count="100" data-suffix="%">
+                  100%
+                </dt>
+                <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Sri Lankan sourced</dd>
+              </div>
+            </dl>
           </div>
         </div>
         {/* wave divider */}
@@ -362,25 +413,19 @@ export default function Home() {
             {productCategories.map((cat) => (
               <div
                 key={cat.name}
-                className={`reveal group rounded-2xl bg-white border border-gray-200 p-6 hover:shadow-lg transition-all duration-200 cursor-pointer ${
+                className={`reveal group rounded-2xl bg-white border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-200 cursor-pointer flex flex-col p-6 pt-0 ${
                   cat.accent === "red" ? "hover:border-nbired/40" : "hover:border-nbigreen/50"
                 }`}
               >
-                <div
-                  className={`w-11 h-11 rounded-xl flex items-center justify-center ${
-                    cat.accent === "red" ? "bg-nbired/10" : "bg-nbigreen/10"
-                  }`}
-                >
-                  <svg
-                    className={`w-6 h-6 ${cat.accent === "red" ? "text-nbired" : "text-nbigreen"}`}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    aria-hidden="true"
-                  >
-                    {cat.icon}
-                  </svg>
+                <div className="relative -mx-6 h-40 overflow-hidden">
+                  <Image
+                    src={cat.img}
+                    alt={cat.imgAlt}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    placeholder="blur"
+                    className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04]"
+                  />
                 </div>
                 <h3 className="mt-4 font-extrabold text-lg">{cat.name}</h3>
                 <ul className="mt-3 space-y-1.5 text-sm text-nbicocoa/90">
@@ -475,12 +520,23 @@ export default function Home() {
           </div>
           <ol className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {journeySteps.map((step) => (
-              <li key={step.n} className="reveal relative rounded-2xl bg-white border border-gray-200 p-6">
-                <span className="text-5xl font-extrabold text-nbired/15" aria-hidden="true">
-                  {step.n}
-                </span>
-                <h3 className="mt-2 font-extrabold text-lg">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-nbicocoa/90">{step.body}</p>
+              <li key={step.n} className="reveal group relative rounded-2xl bg-white border border-gray-200 overflow-hidden">
+                <div className="relative h-36 overflow-hidden">
+                  <Image
+                    src={step.img}
+                    alt={step.imgAlt}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04]"
+                  />
+                  <span className="absolute bottom-2 right-3 text-4xl font-extrabold text-white/80 drop-shadow" aria-hidden="true">
+                    {step.n}
+                  </span>
+                </div>
+                <div className="p-6 pt-4">
+                  <h3 className="font-extrabold text-lg">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-nbicocoa/90">{step.body}</p>
+                </div>
               </li>
             ))}
           </ol>

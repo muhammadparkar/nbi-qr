@@ -13,30 +13,19 @@ export default function Animations() {
       // Hero entrance timeline
       gsap
         .timeline({ defaults: { ease: "power3.out" } })
-        .from(".hero-item", { y: 40, opacity: 0, duration: 0.8, stagger: 0.12 })
-        .from(
-          ".hero-badge",
-          { scale: 0.85, opacity: 0, rotation: -6, duration: 1, ease: "back.out(1.4)" },
-          "-=0.6"
-        );
+        .from(".hero-item", { y: 40, opacity: 0, duration: 0.8, stagger: 0.12 });
 
-      // Floating brand badge (subtle idle motion)
-      gsap.to(".hero-badge", {
-        y: -14,
-        duration: 3,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: 1.2,
-      });
-
-      // Parallax hero blobs
-      gsap.utils.toArray<Element>(".hero-blob").forEach((blob, i) => {
-        gsap.to(blob, {
-          y: i % 2 ? 80 : -80,
+      // Parallax hero background (scaled up so the shift never exposes edges)
+      gsap.fromTo(
+        ".hero-bg",
+        { scale: 1.08, yPercent: 0 },
+        {
+          yPercent: 8,
+          scale: 1.08,
+          ease: "none",
           scrollTrigger: { trigger: "#top", start: "top top", end: "bottom top", scrub: 1 },
-        });
-      });
+        }
+      );
 
       // Stat counters
       gsap.utils.toArray<HTMLElement>(".stat").forEach((el) => {
