@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type NavLink = { href: string; label: string };
@@ -41,7 +42,7 @@ export default function MobileMenu({ links }: { links: NavLink[] }) {
         }`}
       >
         {links.map((l) => (
-          <a
+          <Link
             key={l.href}
             href={l.href}
             onClick={() => setOpen(false)}
@@ -49,10 +50,10 @@ export default function MobileMenu({ links }: { links: NavLink[] }) {
             className="block rounded-xl px-4 py-3 font-semibold text-nbidark hover:bg-nbicream/50 transition-colors duration-200 cursor-pointer"
           >
             {l.label}
-          </a>
+          </Link>
         ))}
-        <a
-          href="#contact"
+        <Link
+          href="/contact"
           onClick={() => setOpen(false)}
           tabIndex={open ? 0 : -1}
           className="press mt-1 flex items-center justify-center gap-2 rounded-xl bg-nbired px-4 py-3 font-bold text-white hover:bg-[#b82217] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-nbired focus-visible:ring-offset-2"
@@ -61,7 +62,7 @@ export default function MobileMenu({ links }: { links: NavLink[] }) {
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12l-7.5 7.5M21 12H3" />
           </svg>
-        </a>
+        </Link>
       </div>
     </div>
   );

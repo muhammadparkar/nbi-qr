@@ -2,65 +2,17 @@ import Image from "next/image";
 import Animations from "./animations";
 import Preloader from "./preloader";
 import ContactForm from "./contact-form";
-import MobileMenu from "./mobile-menu";
 import HeroSlider, { type Slide } from "./hero-slider";
+import { ArrowIcon, CheckItem, DotsMark } from "./ui";
 import heroRange from "@/public/products/hero-range.jpeg";
 import spiceRange from "@/public/products/spice-range.jpeg";
 import ceylonPack from "@/public/products/ceylon-mixture-pack.jpeg";
 import ceylonPouches from "@/public/products/ceylon-pouches.jpeg";
 import ceylonShelf from "@/public/products/ceylon-shelf.jpeg";
 
-function DotsMark({ className }: { className: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
-      <circle cx="12" cy="5.5" r="4" />
-      <circle cx="12" cy="18.5" r="4" />
-      <circle cx="5.5" cy="12" r="4" />
-      <circle cx="18.5" cy="12" r="4" />
-    </svg>
-  );
-}
-
-function LogoMark({ className }: { className: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <circle cx="12" cy="5.5" r="4" fill="#007A3E" />
-      <circle cx="12" cy="18.5" r="4" fill="#007A3E" />
-      <circle cx="5.5" cy="12" r="4" fill="#007A3E" />
-      <circle cx="18.5" cy="12" r="4" fill="#007A3E" />
-    </svg>
-  );
-}
-
-function ArrowIcon() {
-  return (
-    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12l-7.5 7.5M21 12H3" />
-    </svg>
-  );
-}
-
-function CheckItem({ children, iconClass = "text-nbigreen" }: { children: React.ReactNode; iconClass?: string }) {
-  return (
-    <li className="flex items-center gap-3">
-      <svg className={`w-5 h-5 shrink-0 ${iconClass}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-      </svg>
-      {children}
-    </li>
-  );
-}
-
-const marqueeItems = [
-  "Curry Powder",
-  "Roasted Chilli",
-  "Ceylon Cinnamon",
-  "Black Pepper",
-  "Turmeric",
-  "Garam Masala",
-  "Ceylon Mixture",
-  "Since 1987",
-];
+// One product list split across the two marquee lines
+const marqueeItems = ["Curry Powder", "Roasted Chilli", "Ceylon Cinnamon", "Black Pepper", "Since 1987"];
+const marqueeItemsAlt = ["Turmeric", "Garam Masala", "Ceylon Mixture", "Ceylon Tea", "Custom Blends"];
 
 // ponytail: placeholder photos reused across categories for client preview — swap per-category shots later
 const productCategories = [
@@ -134,14 +86,40 @@ const journeySteps = [
   },
 ];
 
-const coreValues = [
-  "Quality First",
-  "Customer Satisfaction",
-  "Integrity & Trust",
-  "Innovation",
-  "Sustainability",
-  "Food Safety",
-  "Continuous Improvement",
+// Story chapters for the pinned horizontal storyline
+const storyChapters = [
+  {
+    year: "1987",
+    kicker: "One man and a mill",
+    title: "It starts in Negama",
+    body: "Abdul Hameed Salahudeen opens a small spice works in Negama, Anuradhapura District — with carefully chosen harvests and an uncompromising nose for quality. The rule is set on day one: nothing leaves the mill that wouldn't be served at his own table.",
+    img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=1200&q=70" as const,
+    imgAlt: "Ground spices in spoons on a dark table",
+  },
+  {
+    year: "1990s",
+    kicker: "The island takes notice",
+    title: "Trust, earned pack by pack",
+    body: "Wholesalers, retailers and distributors across Sri Lanka come to rely on NBI's consistency. No shortcuts, no bulk fillers — just the same honest grind, order after order, season after season.",
+    img: spiceRange,
+    imgAlt: "NBI retail spice range",
+  },
+  {
+    year: "2000s",
+    kicker: "Craft meets discipline",
+    title: "Quality becomes doctrine",
+    body: "Modern processing, strict hygiene control and rigorous QC join the traditional craft. Every batch is checked for freshness, purity and aroma before it earns the NBI mark.",
+    img: ceylonPouches,
+    imgAlt: "NBI kraft pouches with quality labelling",
+  },
+  {
+    year: "Today",
+    kicker: "Negama to the world",
+    title: "The island travels well",
+    body: "NBI ships premium Sri Lankan spices to the GCC, the Middle East and beyond — bilingual export packs, dependable logistics, and the founding promise intact: if it doesn't smell like the island, it doesn't ship.",
+    img: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1200&q=70" as const,
+    imgAlt: "Container port with export shipments",
+  },
 ];
 
 // ponytail: Unsplash stock as preview filler — replace with NBI factory/product photography
@@ -157,52 +135,11 @@ const heroSlides: Slide[] = [
   },
 ];
 
-const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#products", label: "Products" },
-  { href: "#quality", label: "Quality" },
-  { href: "#export", label: "Export" },
-  { href: "#contact", label: "Contact" },
-];
-
 export default function Home() {
   return (
     <>
       <Preloader />
       <Animations />
-
-      {/* ============ NAVBAR ============ */}
-      <header className="fixed top-4 left-4 right-4 z-50">
-        <nav
-          className="relative mx-auto max-w-6xl rounded-2xl bg-white/85 backdrop-blur-md border border-gray-200 shadow-sm px-5 py-3 flex items-center justify-between gap-3"
-          aria-label="Main navigation"
-        >
-          <a href="#top" className="flex items-center gap-3 cursor-pointer" aria-label="NBI home">
-            <LogoMark className="w-8 h-8" />
-            <span className="leading-none">
-              <span className="block font-extrabold tracking-tight text-lg text-nbidark">NBI</span>
-              <span className="block text-[10px] tracking-[0.18em] uppercase text-nbisand">Since 1987</span>
-            </span>
-          </a>
-          <div className="hidden md:flex items-center gap-7 text-sm font-semibold text-nbidark/80">
-            {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="hover:text-nbired transition-colors duration-200 cursor-pointer">
-                {l.label}
-              </a>
-            ))}
-          </div>
-          <div className="flex items-center gap-1 ml-auto md:ml-0">
-            <a
-              href="#contact"
-              className="press hidden md:inline-flex items-center gap-2 rounded-xl bg-nbired px-4 py-2.5 text-sm font-bold text-white hover:bg-[#b82217] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-nbired focus-visible:ring-offset-2"
-            >
-              Request a Quote
-              <ArrowIcon />
-            </a>
-            <MobileMenu links={navLinks} />
-          </div>
-        </nav>
-      </header>
 
       {/* ============ HERO ============ */}
       <section id="top" className="relative overflow-hidden bg-nbidark text-white">
@@ -229,14 +166,14 @@ export default function Home() {
 
               <div className="hero-item mt-8 sm:mt-10 flex flex-col sm:flex-row w-full sm:w-auto justify-center md:justify-start gap-3 sm:gap-4">
                 <a
-                  href="#products"
+                  href="/products"
                   className="press inline-flex items-center justify-center gap-2 rounded-full bg-nbired px-7 py-3.5 font-bold text-white hover:bg-[#b82217] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   Explore Our Spices
                   <ArrowIcon />
                 </a>
                 <a
-                  href="#export"
+                  href="/export"
                   className="press inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 backdrop-blur px-7 py-3.5 font-bold text-white hover:bg-white/20 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   Export Partnerships
@@ -251,8 +188,8 @@ export default function Home() {
                   <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Years of craft</dd>
                 </div>
                 <div>
-                  <dt className="stat text-3xl sm:text-4xl font-extrabold" data-count="17" data-suffix="+">
-                    17+
+                  <dt className="stat text-3xl sm:text-4xl font-extrabold" data-count="50" data-suffix="+">
+                    50+
                   </dt>
                   <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Product lines</dd>
                 </div>
@@ -263,44 +200,29 @@ export default function Home() {
                   <dd className="mt-1 text-xs uppercase tracking-widest text-nbicream/70">Sri Lankan sourced</dd>
                 </div>
               </dl>
+
+              <p className="hero-item mt-10 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-nbicream/70">
+                <DotsMark className="w-4 h-4 text-nbigreen shrink-0" />
+                Established 1987 by <span className="text-white">Salahudeen Abdul Hameed</span>
+              </p>
             </div>
 
             {/* Layered product cards */}
             <div className="md:col-span-5 hero-badge relative mx-auto w-full max-w-sm mt-8 md:mt-0">
-              <div className="relative ml-10 sm:ml-14 aspect-[4/5] rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
+              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
                 <Image
-                  src={ceylonShelf}
-                  alt="NBI Ceylon Mixture kraft pouches on a shelf"
+                  src={ceylonPack}
+                  alt="NBI Ceylon Mixture 200g pack"
                   fill
                   sizes="(min-width: 768px) 24rem, 90vw"
                   placeholder="blur"
                   priority
-                  className="object-cover"
+                  className="object-cover object-[22%_center]"
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent px-5 pt-20 pb-5">
                   <p className="text-[11px] font-bold tracking-[0.3em] uppercase text-nbicream/80">Signature</p>
                   <p className="mt-1 text-2xl font-extrabold tracking-tight text-white">Ceylon Mixture</p>
                 </div>
-              </div>
-              <div className="absolute -top-6 left-0 w-28 sm:w-36 aspect-square rounded-2xl overflow-hidden border border-white/20 shadow-2xl rotate-[-5deg]">
-                <Image
-                  src={spiceRange}
-                  alt="NBI spice powder packs"
-                  fill
-                  sizes="9rem"
-                  placeholder="blur"
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-6 left-2 w-32 sm:w-40 aspect-[4/3] rounded-2xl overflow-hidden border border-white/20 shadow-2xl rotate-[4deg]">
-                <Image
-                  src={heroRange}
-                  alt="NBI spice range lineup"
-                  fill
-                  sizes="10rem"
-                  placeholder="blur"
-                  className="object-cover"
-                />
               </div>
             </div>
           </div>
@@ -311,10 +233,10 @@ export default function Home() {
         </svg>
       </section>
 
-      {/* ============ MARQUEE ============ */}
-      <div className="bg-nbired text-white overflow-hidden py-3 select-none" aria-hidden="true">
+      {/* ============ MARQUEE (one band, two counter-scrolling lines) ============ */}
+      <div className="bg-nbired text-white overflow-hidden py-3 select-none space-y-2.5" aria-hidden="true">
         <div id="marquee" className="flex w-max whitespace-nowrap will-change-transform">
-          {[0, 1].map((copy) => (
+          {[0, 1, 2, 3].map((copy) => (
             <div key={copy} className="flex items-center gap-8 pr-8 text-sm font-extrabold uppercase tracking-[0.2em]">
               {marqueeItems.map((item) => (
                 <span key={item} className="flex items-center gap-8">
@@ -325,56 +247,70 @@ export default function Home() {
             </div>
           ))}
         </div>
+        <div id="marquee-alt" className="flex w-max whitespace-nowrap will-change-transform">
+          {[0, 1, 2, 3].map((copy) => (
+            <div key={copy} className="flex items-center gap-8 pr-8 text-sm font-extrabold uppercase tracking-[0.2em] text-nbicream/90">
+              {marqueeItemsAlt.map((item) => (
+                <span key={item} className="flex items-center gap-8">
+                  {item}
+                  <DotsMark className="w-3 h-3 shrink-0" />
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* ============ ABOUT ============ */}
-      <section id="about" className="mx-auto max-w-6xl px-5 py-20 md:py-28">
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          <div className="reveal">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-nbigreen">Our Story</p>
-            <h2 className="mt-3 text-3xl md:text-4xl font-extrabold tracking-tight">Three decades of spice heritage</h2>
-            <p className="mt-6 font-serif text-lg leading-relaxed text-nbicocoa">
-              Founded in 1987 by visionary entrepreneur <strong className="font-semibold text-nbidark">A.H. Salahudeen</strong>,
-              New Badriya Industries has grown from the heart of Negama, Anuradhapura District into a trusted name in Sri
-              Lankan spice manufacturing.
-            </p>
-            <p className="mt-4 font-serif text-lg leading-relaxed text-nbicocoa">
-              We combine carefully selected raw materials with modern processing techniques — earning the trust of
-              wholesalers, retailers, distributors, and international buyers alike.
-            </p>
-            <div className="mt-8 grid grid-cols-2 gap-4">
-              <div className="rounded-2xl bg-nbicream/60 border border-nbigreen/15 p-5">
-                <h3 className="font-extrabold text-nbigreen">Vision</h3>
-                <p className="mt-2 text-sm leading-relaxed text-nbidark/80">
-                  Sri Lanka&apos;s leading spice manufacturer and a globally recognized exporter of premium Ceylon spices.
-                </p>
-              </div>
-              <div className="rounded-2xl bg-nbicream/60 border border-nbigreen/15 p-5">
-                <h3 className="font-extrabold text-nbigreen">Mission</h3>
-                <p className="mt-2 text-sm leading-relaxed text-nbidark/80">
-                  Safe, hygienic, premium-quality spices that exceed expectations — bringing authentic Sri Lankan flavor to
-                  the world.
-                </p>
-              </div>
+      {/* ============ OUR STORY (pinned horizontal storyline on desktop) ============ */}
+      <section id="about" className="relative bg-nbidark text-white overflow-hidden">
+        <div className="story-stage flex flex-col md:h-screen">
+          <div className="mx-auto w-full max-w-6xl px-5 pt-16 md:pt-24 pb-8 flex items-end justify-between gap-6">
+            <div>
+              <p className="font-serif italic text-lg" style={{ color: "#FF5A4C" }}>
+                Scroll through four decades
+              </p>
+              <h2 className="mt-1 text-3xl md:text-4xl font-extrabold tracking-tight">Our Story</h2>
+            </div>
+            <div className="hidden md:block w-48 h-1 rounded-full bg-white/15 overflow-hidden">
+              <div className="story-progress h-full w-full origin-left scale-x-0 bg-nbired" />
             </div>
           </div>
-          <div className="reveal">
-            <div className="rounded-3xl bg-nbidark text-white p-8 md:p-10">
-              <h3 className="text-xl font-extrabold tracking-tight">Our Core Values</h3>
-              <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm">
-                {coreValues.map((v) => (
-                  <CheckItem key={v}>{v}</CheckItem>
-                ))}
-              </ul>
-              <div className="mt-8 rounded-2xl bg-white/10 border border-white/15 p-5">
-                <p className="font-serif italic text-nbicream leading-relaxed">
-                  &ldquo;Our dedication to quality, consistency, and customer satisfaction has made us a trusted name for over
-                  three decades.&rdquo;
-                </p>
-                <p className="mt-3 text-xs font-bold uppercase tracking-widest text-nbicream/70">— New Badriya Industries</p>
-              </div>
-            </div>
+          <div className="story-track flex flex-col md:flex-row md:w-max md:flex-1">
+            {storyChapters.map((ch) => (
+              <article key={ch.year} className="story-panel md:w-screen md:shrink-0 md:flex md:items-center">
+                <div className="mx-auto w-full max-w-6xl px-5 py-12 md:py-0 grid md:grid-cols-2 gap-8 md:gap-14 items-center">
+                  <div className="relative">
+                    <span
+                      className="block font-extrabold tracking-tight text-7xl md:text-9xl leading-none text-white/10 select-none"
+                      aria-hidden="true"
+                    >
+                      {ch.year}
+                    </span>
+                    <p className="mt-4 font-serif italic text-lg" style={{ color: "#FF5A4C" }}>
+                      {ch.kicker}
+                    </p>
+                    <h3 className="mt-2 text-2xl md:text-4xl font-extrabold tracking-tight">{ch.title}</h3>
+                    <p className="mt-4 font-serif text-lg leading-relaxed text-nbicream/90 max-w-lg">{ch.body}</p>
+                  </div>
+                  <div className="relative h-56 md:h-80 rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
+                    <Image
+                      src={ch.img}
+                      alt={ch.imgAlt}
+                      fill
+                      sizes="(min-width: 768px) 45vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
+          <p className="hidden md:flex items-center justify-center gap-2 pb-6 text-xs font-bold uppercase tracking-[0.25em] text-nbicream/50">
+            <svg className="w-4 h-4 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21l-7.5-7.5M12 21V3" />
+            </svg>
+            Keep scrolling — the story moves with you
+          </p>
         </div>
       </section>
 
@@ -433,7 +369,7 @@ export default function Home() {
 
           <div className="mt-10 reveal">
             <a
-              href="#contact"
+              href="/contact"
               className="inline-flex items-center gap-2 font-bold text-nbired hover:text-[#b82217] transition-colors duration-200 cursor-pointer"
             >
               Request full product catalogue
@@ -485,7 +421,7 @@ export default function Home() {
               <CheckItem>Distributed in Qatar via ARCO Trading &amp; Marketing Co WLL, Doha</CheckItem>
             </ul>
             <a
-              href="#contact"
+              href="/contact"
               className="press mt-9 inline-flex items-center gap-2 rounded-xl bg-nbired px-6 py-3.5 font-bold text-white hover:bg-[#b82217] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-nbired focus-visible:ring-offset-2"
             >
               Order Ceylon Mixture
@@ -633,7 +569,7 @@ export default function Home() {
                 <CheckItem iconClass="text-[#7BC9A0]">Customized packaging for target markets</CheckItem>
               </ul>
               <a
-                href="#contact"
+                href="/contact"
                 className="press mt-9 inline-flex items-center gap-2 rounded-xl bg-nbired px-6 py-3.5 font-bold text-white hover:bg-[#b82217] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Become a Distribution Partner
@@ -700,10 +636,10 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
                   </svg>
                   <a
-                    href="mailto:info@nbispices.lk"
+                    href="mailto:info@nbiholding.com"
                     className="underline decoration-white/40 underline-offset-4 hover:decoration-white transition-colors duration-200 cursor-pointer"
                   >
-                    info@nbispices.lk
+                    info@nbiholding.com
                   </a>
                 </p>
               </address>
@@ -713,31 +649,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ FOOTER ============ */}
-      <footer className="bg-nbidark text-nbicream/80">
-        <div className="mx-auto max-w-6xl px-5 py-12">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-            <div className="flex items-center gap-3">
-              <LogoMark className="w-8 h-8" />
-              <div className="leading-tight">
-                <p className="font-extrabold text-white">NBI (PVT) LTD</p>
-                <p className="text-xs">New Badriya Industries · Since 1987</p>
-              </div>
-            </div>
-            <nav className="flex flex-wrap gap-x-7 gap-y-2 text-sm font-semibold" aria-label="Footer">
-              {navLinks.map((l) => (
-                <a key={l.href} href={l.href} className="hover:text-white transition-colors duration-200 cursor-pointer">
-                  {l.label}
-                </a>
-              ))}
-            </nav>
-          </div>
-          <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-3 text-xs text-nbicream/60">
-            <p>© 2026 New Badriya Industries (PVT) LTD. All rights reserved.</p>
-            <p>Founded by A.H. Salahudeen · Negama, Anuradhapura District, Sri Lanka</p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }

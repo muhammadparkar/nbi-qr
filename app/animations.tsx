@@ -61,8 +61,10 @@ export default function Animations() {
         }
       );
 
-      // Marquee (two identical tracks rendered; shift half the strip for a seamless loop)
+      // Marquees (two identical tracks rendered; shift half the strip for a seamless loop)
       gsap.to("#marquee", { xPercent: -50, duration: 26, ease: "none", repeat: -1 });
+      // Second row drifts the opposite way
+      gsap.fromTo("#marquee-alt", { xPercent: -50 }, { xPercent: 0, duration: 30, ease: "none", repeat: -1 });
 
       // Scroll reveals (staggered per section batch)
       ScrollTrigger.batch(".reveal", {
@@ -102,8 +104,47 @@ export default function Animations() {
       });
     });
 
+    // Pinned horizontal storyline — desktop + motion-OK only.
+    // Below md (or with reduced motion) the chapters simply stack vertically via the default CSS.
+    mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+      const panels = gsap.utils.toArray<HTMLElement>(".story-panel");
+      if (panels.length < 2) return;
+      const scrollLen = () => window.innerHeight * (panels.length - 1);
+      gsap.to(".story-track", {
+        xPercent: (-100 * (panels.length - 1)) / panels.length,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#about",
+          start: "top top",
+          end: () => "+=" + scrollLen(),
+          // Pin the inner stage, not the section: GSAP's pin-spacer must not
+          // re-parent a node React removes directly on route change.
+          pin: ".story-stage",
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+      gsap.to(".story-progress", {
+        scaleX: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#about",
+          start: "top top",
+          end: () => "+=" + scrollLen(),
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+    });
+
     mm.add("(prefers-reduced-motion: reduce)", () => {
       gsap.set(".reveal, .hero-item, .hero-badge, section h2", { clearProps: "all", opacity: 1 });
+      // Storyline falls back to a vertical stack — drop the horizontal layout classes
+      document.querySelector(".story-track")?.classList.remove("md:flex-row", "md:w-max", "md:flex-1");
+      document.querySelector(".story-stage")?.classList.remove("md:h-screen");
+      gsap.utils
+        .toArray<HTMLElement>(".story-panel")
+        .forEach((p) => p.classList.remove("md:w-screen", "md:shrink-0", "md:flex", "md:items-center"));
     });
 
     return () => mm.revert();

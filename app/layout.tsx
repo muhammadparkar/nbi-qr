@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, Lora } from "next/font/google";
+import { SiteNav, SiteFooter } from "./ui";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -28,7 +29,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${archivo.variable} ${lora.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-[#FBFAF7] text-nbidark font-sans">
-        {children}
+        <SiteNav />
+        <main className="flex-1">{children}</main>
+        <SiteFooter />
       </body>
     </html>
   );
