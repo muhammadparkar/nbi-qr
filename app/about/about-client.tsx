@@ -437,16 +437,39 @@ export default function AboutClient() {
                   Heat changes chilli chemistry. Slide to heat the roasting drums and observe color maturity:
                 </p>
 
-                {/* Graphic Visual Representation */}
-                <div className="my-4 h-36 rounded-2xl overflow-hidden relative border border-gray-100 shadow-inner bg-gray-50">
-                  <Image
-                    src={chilliRoastSteps[chilliRoast].img}
-                    alt={chilliRoastSteps[chilliRoast].title}
-                    fill
-                    className="object-cover transition-opacity duration-300"
-                    unoptimized
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-3">
+                {/* SVG Roasting Drum Visualisation */}
+                <div className="my-4 h-36 rounded-2xl overflow-hidden relative border border-gray-100 shadow-inner flex items-center justify-center"
+                  style={{ background: `hsl(${20 + chilliRoast * 8},${30 + chilliRoast * 12}%,${94 - chilliRoast * 8}%)` }}
+                >
+                  <svg viewBox="0 0 200 100" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                    {/* Drum body */}
+                    <ellipse cx="100" cy="50" rx="70" ry="38" fill={`hsl(${15 + chilliRoast * 10},${60 + chilliRoast * 8}%,${72 - chilliRoast * 10}%)`} />
+                    <ellipse cx="100" cy="50" rx="70" ry="38" fill="none" stroke={`hsl(${10 + chilliRoast*8},80%,${50-chilliRoast*5}%)`} strokeWidth="2"/>
+                    {/* Heat waves */}
+                    {chilliRoast > 1 && (
+                      <>
+                        <path d="M70 25 Q75 18 80 25 Q85 18 90 25" stroke="#f97316" strokeWidth="1.5" fill="none" opacity="0.7"/>
+                        <path d="M108 20 Q113 13 118 20 Q123 13 128 20" stroke="#ef4444" strokeWidth="1.5" fill="none" opacity="0.7"/>
+                      </>
+                    )}
+                    {/* Chilli peppers at different stages */}
+                    {[0,1,2,3,4].map((i) => (
+                      <ellipse key={i}
+                        cx={55 + i * 22} cy={50 + (i % 2 === 0 ? -8 : 8)}
+                        rx="7" ry="4"
+                        transform={`rotate(${-30 + i * 15} ${55 + i * 22} ${50 + (i % 2 === 0 ? -8 : 8)})`}
+                        fill={`hsl(${chilliRoast === 0 ? 110 : chilliRoast === 1 ? 45 : chilliRoast === 2 ? 20 : 10},${70+chilliRoast*5}%,${chilliRoast === 0 ? 48 : 38 - chilliRoast*5}%)`}
+                      />
+                    ))}
+                    {/* Temperature gauge */}
+                    <rect x="158" y="25" width="14" height="50" rx="7" fill="#e5e7eb"/>
+                    <rect x="158" y={75 - (chilliRoast * 12)} width="14" height={chilliRoast * 12} rx="7"
+                      fill={`hsl(${20 - chilliRoast*5},90%,${55 - chilliRoast*6}%)`}
+                      style={{ transition: "all 0.5s ease" }}
+                    />
+                    <text x="165" y="21" textAnchor="middle" fontSize="7" fontWeight="bold" fill="#6b7280">{["80°","140°","185°","220°"][chilliRoast]}C</text>
+                  </svg>
+                  <div className="absolute bottom-2 left-3">
                     <span className="text-[10px] font-extrabold text-white uppercase tracking-wider bg-nbired px-2 py-0.5 rounded">
                       {chilliRoastSteps[chilliRoast].title}
                     </span>
@@ -499,16 +522,28 @@ export default function AboutClient() {
                   Granularity influences oil dispersion. Slide to grind Cinnamon bark to export grades:
                 </p>
 
-                {/* Graphic Visual Representation */}
-                <div className="my-4 h-36 rounded-2xl overflow-hidden relative border border-gray-100 shadow-inner bg-gray-50">
-                  <Image
-                    src={cinnamonGrindSteps[cinnamonGrind].img}
-                    alt={cinnamonGrindSteps[cinnamonGrind].title}
-                    fill
-                    className="object-cover transition-opacity duration-300"
-                    unoptimized
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-3">
+                {/* SVG Particle Size Visualisation */}
+                <div className="my-4 h-36 rounded-2xl overflow-hidden relative border border-gray-100 shadow-inner bg-[#fdf8f3] flex items-center justify-center">
+                  <svg viewBox="0 0 200 100" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                    {/* Sieve mesh lines */}
+                    {[0,1,2,3].map(row => (
+                      <line key={`h${row}`} x1="10" y1={20 + row * 20} x2="190" y2={20 + row * 20}
+                        stroke="#d6b99a" strokeWidth="0.5" strokeDasharray={`${4 - cinnamonGrind * 0.8} ${4 - cinnamonGrind * 0.8}`} opacity="0.4"/>
+                    ))}
+                    {/* Particles — bigger & fewer at low grind, tiny & many at high grind */}
+                    {Array.from({ length: [5, 12, 22, 40][cinnamonGrind] }, (_, i) => {
+                      const r = [9, 5.5, 3, 1.5][cinnamonGrind];
+                      const cx = 15 + (i % ([5,4,6,8][cinnamonGrind])) * ((170) / ([4,3,5,7][cinnamonGrind]));
+                      const cy = 18 + Math.floor(i / ([5,4,6,8][cinnamonGrind])) * (60 / ([1,3,4,5][cinnamonGrind]));
+                      return <ellipse key={i} cx={cx + 8} cy={cy + 12} rx={r} ry={r * 0.65}
+                        transform={`rotate(${i * 37 % 180} ${cx+8} ${cy+12})`}
+                        fill={`hsl(${20 + i*3 % 15},${55+cinnamonGrind*5}%,${45 + cinnamonGrind * 4}%)`} opacity="0.85"/>;
+                    })}
+                    {/* Mesh size label */}
+                    <rect x="130" y="72" width="58" height="16" rx="4" fill="#007a3e" opacity="0.85"/>
+                    <text x="159" y="84" textAnchor="middle" fontSize="8" fontWeight="bold" fill="white">{["Quill","40 mesh","80 mesh","120 mesh"][cinnamonGrind]}</text>
+                  </svg>
+                  <div className="absolute bottom-2 left-3">
                     <span className="text-[10px] font-extrabold text-white uppercase tracking-wider bg-nbigreen px-2 py-0.5 rounded">
                       {cinnamonGrindSteps[cinnamonGrind].title}
                     </span>
@@ -561,32 +596,42 @@ export default function AboutClient() {
                   Soil structure alters potency. Toggle cultivation location to compare the curcumin concentration:
                 </p>
 
-                {/* Graphic Visual Representation with Curcumin overlay */}
-                <div className="my-4 h-36 rounded-2xl overflow-hidden relative border border-gray-100 shadow-inner bg-gray-50">
-                  <Image
-                    src={soilType === "nbi" ? turmericSoilDetails.nbi.img : turmericSoilDetails.standard.img}
-                    alt={soilType === "nbi" ? "NBI Turmeric Sourcing" : "Standard Turmeric Sourcing"}
-                    fill
-                    className="object-cover transition-opacity duration-300"
-                    unoptimized
-                  />
-                  {/* Curcumin Metric Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent flex flex-col justify-end p-3 z-10">
-                    <div className="flex justify-between items-center text-white">
-                      <span className="text-[10px] font-extrabold uppercase tracking-wider">
-                        Curcumin Level
-                      </span>
-                      <span className="text-xs font-black text-yellow-400">
-                        {soilType === "nbi" ? "5.8% — 6.2%" : "2.4% — 3.1%"}
-                      </span>
-                    </div>
-                    <div className="h-1.5 w-full bg-white/20 rounded-full overflow-hidden mt-1.5">
-                      <div 
-                        className="h-full bg-yellow-400 transition-all duration-500 ease-out" 
-                        style={{ width: soilType === "nbi" ? "95%" : "45%" }}
-                      />
-                    </div>
-                  </div>
+                {/* SVG Soil Cross-Section + Curcumin bar */}
+                <div className="my-4 h-36 rounded-2xl overflow-hidden relative border border-gray-100 shadow-inner flex items-center justify-center bg-[#f9f5ee]">
+                  <svg viewBox="0 0 200 100" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                    {/* Sky / above ground */}
+                    <rect x="0" y="0" width="200" height="38" fill={soilType === "nbi" ? "#dff0e8" : "#e8f0f5"}/>
+                    {/* Topsoil layer */}
+                    <rect x="0" y="38" width="200" height="18" fill={soilType === "nbi" ? "#7a5230" : "#a09070"}/>
+                    {/* Subsoil */}
+                    <rect x="0" y="56" width="200" height="44" fill={soilType === "nbi" ? "#5c3a1e" : "#8a7a60"}/>
+                    {/* Soil texture dots */}
+                    {[20,45,70,95,120,145,170].map((x,i) => (
+                      <circle key={i} cx={x} cy={47} r="2" fill="rgba(255,255,255,0.15)"/>
+                    ))}
+                    {/* Rhizomes / turmeric roots */}
+                    {[30,80,130,170].map((x,i) => (
+                      <g key={i}>
+                        <ellipse cx={x} cy={64} rx="10" ry="5" fill={soilType === "nbi" ? "#f59e0b" : "#d4a050"} opacity="0.9"/>
+                        <line x1={x} y1="59" x2={x} y2="38" stroke={soilType === "nbi" ? "#16a34a" : "#6b8f6b"} strokeWidth="1.5"/>
+                        {/* Leaf */}
+                        <ellipse cx={x - 5} cy={28} rx="8" ry="4" transform={`rotate(-30 ${x-5} 28)`}
+                          fill={soilType === "nbi" ? "#15803d" : "#5a8a5a"} opacity="0.9"/>
+                        <ellipse cx={x + 5} cy={26} rx="8" ry="4" transform={`rotate(25 ${x+5} 26)`}
+                          fill={soilType === "nbi" ? "#16a34a" : "#6b8f6b"} opacity="0.9"/>
+                      </g>
+                    ))}
+                    {/* Curcumin bar overlay */}
+                    <rect x="8" y="76" width="184" height="16" rx="4" fill="rgba(0,0,0,0.45)"/>
+                    <rect x="10" y="78" width={soilType === "nbi" ? 170 : 80} height="12" rx="3"
+                      fill={soilType === "nbi" ? "#fbbf24" : "#d97706"}
+                      style={{ transition: "width 0.6s ease" }}
+                    />
+                    <text x="14" y="88" fontSize="7" fontWeight="bold" fill="white">CURCUMIN</text>
+                    <text x="186" y="88" textAnchor="end" fontSize="7" fontWeight="bold" fill="white">
+                      {soilType === "nbi" ? "5.8–6.2%" : "2.4–3.1%"}
+                    </text>
+                  </svg>
                 </div>
                 
                 {/* Active step details */}

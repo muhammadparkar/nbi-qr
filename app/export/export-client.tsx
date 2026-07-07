@@ -76,26 +76,150 @@ const volumes = {
   },
 };
 
-const exportSteps = [
+type ExportStep = {
+  step: string;
+  title: string;
+  subtitle: string;
+  desc: string;
+  detail: string;
+  color: string;
+  accent: string;
+  metrics: { label: string; value: string }[];
+  svg: React.ReactNode;
+};
+
+const exportSteps: ExportStep[] = [
   {
-    title: "1. Specification Align",
+    step: "01",
+    title: "Specification Align",
+    subtitle: "Quality Benchmarking",
     desc: "Review mesh sizes, moisture parameters, and color values matching destination imports.",
+    detail: "Our trade team reviews buyer specification sheets—EU Reg 2023/915, FDA GRAS, SFDA 1516—cross-referencing mesh grade (40–120 mesh), moisture caps (≤11%), and SHU/ASTA color values before any production slot is confirmed.",
+    color: "#0a3920",
+    accent: "#007a3e",
+    metrics: [{ label: "Mesh Range", value: "40–120 mesh" }, { label: "Moisture Cap", value: "≤ 11%" }, { label: "SLA", value: "24 hrs" }],
+    svg: (
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+        <rect x="10" y="20" width="100" height="80" rx="8" fill="#deeede" />
+        <rect x="20" y="30" width="80" height="10" rx="3" fill="#007a3e" opacity="0.3"/>
+        <rect x="20" y="46" width="55" height="7" rx="3" fill="#0a3920" opacity="0.2"/>
+        <rect x="20" y="58" width="70" height="7" rx="3" fill="#0a3920" opacity="0.15"/>
+        <rect x="20" y="70" width="45" height="7" rx="3" fill="#0a3920" opacity="0.12"/>
+        <circle cx="92" cy="72" r="20" fill="white" stroke="#007a3e" strokeWidth="3"/>
+        <path d="M84 72 L90 78 L100 66" stroke="#007a3e" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="92" cy="72" r="14" fill="none" stroke="#007a3e" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.5"/>
+        <line x1="108" y1="88" x2="116" y2="96" stroke="#007a3e" strokeWidth="3" strokeLinecap="round"/>
+      </svg>
+    ),
   },
   {
-    title: "2. Custom Milling",
+    step: "02",
+    title: "Custom Milling",
+    subtitle: "Precision Processing",
     desc: "Spices ground to order under temperature controls to preserve essential volatile oils.",
+    detail: "NBI's in-house impact mill and hammer-mill lines run at controlled sub-60°C temperatures. Real-time thermocouples log batch temperatures every 15 seconds. Each grinding run is batch-ID tagged with milling timestamp, RPM setting, and moisture post-grind readings.",
+    color: "#5e887e",
+    accent: "#d9291c",
+    metrics: [{ label: "Mill Temp", value: "< 60 °C" }, { label: "Log Interval", value: "15 sec" }, { label: "Traceability", value: "Batch ID" }],
+    svg: (
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+        <circle cx="60" cy="60" r="34" fill="#f5f0eb" stroke="#d9291c" strokeWidth="2"/>
+        <circle cx="60" cy="60" r="22" fill="none" stroke="#d9291c" strokeWidth="2" strokeDasharray="4 3" opacity="0.5"/>
+        <circle cx="60" cy="60" r="8" fill="#d9291c" opacity="0.85"/>
+        <line x1="60" y1="26" x2="60" y2="38" stroke="#0a3920" strokeWidth="3" strokeLinecap="round"/>
+        <line x1="60" y1="82" x2="60" y2="94" stroke="#0a3920" strokeWidth="3" strokeLinecap="round"/>
+        <line x1="26" y1="60" x2="38" y2="60" stroke="#0a3920" strokeWidth="3" strokeLinecap="round"/>
+        <line x1="82" y1="60" x2="94" y2="60" stroke="#0a3920" strokeWidth="3" strokeLinecap="round"/>
+        <line x1="36.3" y1="36.3" x2="44.5" y2="44.5" stroke="#0a3920" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="75.5" y1="75.5" x2="83.7" y2="83.7" stroke="#0a3920" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="83.7" y1="36.3" x2="75.5" y2="44.5" stroke="#0a3920" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="44.5" y1="75.5" x2="36.3" y2="83.7" stroke="#0a3920" strokeWidth="2.5" strokeLinecap="round"/>
+        <rect x="52" y="12" width="16" height="10" rx="3" fill="#0a3920"/>
+        <rect x="54" y="10" width="12" height="4" rx="2" fill="#5e887e"/>
+      </svg>
+    ),
   },
   {
-    title: "3. Packaging & Flushes",
+    step: "03",
+    title: "Packaging & Flush",
+    subtitle: "Freshness Seal",
     desc: "Sealed in high-barrier bags with nitrogen gas replacement to extend freshness.",
+    detail: "Filled in nitrogen-flushed 3-layer laminate pouches (BOPP/ALU/PE) under ≤5% residual O₂ atmosphere. Heat-sealed with inline seal-check sensors. Each pallet wrapped in stretch film with desiccant sachets—moisture barrier rated ≥ 1.5 g/m²/day.",
+    color: "#403638",
+    accent: "#007a3e",
+    metrics: [{ label: "O₂ Residual", value: "≤ 5%" }, { label: "Barrier", value: "1.5 g/m²/day" }, { label: "Layers", value: "3-ply laminate" }],
+    svg: (
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+        <path d="M30 35 Q30 25 40 25 L80 25 Q90 25 90 35 L90 95 Q90 105 80 105 L40 105 Q30 105 30 95 Z" fill="#deeede" stroke="#007a3e" strokeWidth="2"/>
+        <path d="M30 35 L90 35" stroke="#007a3e" strokeWidth="2"/>
+        <path d="M40 45 L80 45" stroke="#007a3e" strokeWidth="1.5" opacity="0.4"/>
+        <path d="M40 55 L80 55" stroke="#007a3e" strokeWidth="1.5" opacity="0.3"/>
+        <path d="M40 65 L80 65" stroke="#007a3e" strokeWidth="1.5" opacity="0.2"/>
+        <rect x="44" y="75" width="32" height="16" rx="4" fill="#007a3e" opacity="0.85"/>
+        <text x="60" y="87" textAnchor="middle" fill="white" fontSize="6" fontWeight="bold" fontFamily="sans-serif">NBI EXPORT</text>
+        <circle cx="92" cy="38" r="10" fill="#007a3e"/>
+        <path d="M88 38 Q92 32 96 38 Q92 44 88 38Z" fill="white" opacity="0.7"/>
+        <line x1="92" y1="28" x2="92" y2="22" stroke="#007a3e" strokeWidth="2"/>
+        <circle cx="92" cy="20" r="3" fill="#d9291c"/>
+      </svg>
+    ),
   },
   {
-    title: "4. Colombo Customs",
+    step: "04",
+    title: "Colombo Customs",
+    subtitle: "Regulatory Clearance",
     desc: "Transit from Negama mill to Colombo Port. File all phytosanitary and origin papers.",
+    detail: "NBI's licensed clearing agent files EX1 export declaration, Certificate of Origin (GSP Form A or EUR.1), phytosanitary certificate (NPPO-LK), and HACCP attestation at Colombo Port. Average customs dwell time: 18–24 hours.",
+    color: "#0a3920",
+    accent: "#d9291c",
+    metrics: [{ label: "Port", value: "Colombo CMB" }, { label: "Dwell Time", value: "18–24 hrs" }, { label: "Cert", value: "GSP Form A" }],
+    svg: (
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+        <rect x="15" y="55" width="90" height="40" rx="6" fill="#deeede" stroke="#0a3920" strokeWidth="2"/>
+        <rect x="15" y="55" width="90" height="14" rx="6" fill="#0a3920"/>
+        <path d="M15 62 L105 62" stroke="#0a3920" strokeWidth="0"/>
+        <rect x="25" y="72" width="18" height="14" rx="3" fill="white" stroke="#d9291c" strokeWidth="1.5"/>
+        <rect x="50" y="72" width="18" height="14" rx="3" fill="white" stroke="#d9291c" strokeWidth="1.5"/>
+        <rect x="75" y="72" width="18" height="14" rx="3" fill="white" stroke="#d9291c" strokeWidth="1.5"/>
+        <circle cx="34" cy="45" r="12" fill="none" stroke="#d9291c" strokeWidth="2"/>
+        <path d="M30 45 L33 48 L40 41" stroke="#d9291c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M34 33 L34 30" stroke="#d9291c" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M34 60 L34 57" stroke="#d9291c" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M46 45 L49 45" stroke="#d9291c" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M22 45 L19 45" stroke="#d9291c" strokeWidth="2" strokeLinecap="round"/>
+        <circle cx="34" cy="45" r="4" fill="#d9291c" opacity="0.15"/>
+        <rect x="72" y="20" width="28" height="30" rx="4" fill="white" stroke="#0a3920" strokeWidth="1.5"/>
+        <rect x="76" y="25" width="20" height="3" rx="1.5" fill="#0a3920" opacity="0.3"/>
+        <rect x="76" y="31" width="14" height="3" rx="1.5" fill="#0a3920" opacity="0.2"/>
+        <rect x="76" y="37" width="17" height="3" rx="1.5" fill="#0a3920" opacity="0.2"/>
+        <path d="M76 44 L80 47 L86 41" stroke="#007a3e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
   },
   {
-    title: "5. Sea Freight",
+    step: "05",
+    title: "Sea Freight",
+    subtitle: "Global Delivery",
     desc: "Sailed in climate-monitored dry cargo containers with moisture traps.",
+    detail: "20′ and 40′ ISO dry containers fitted with Escortis IoT dataloggers track temperature (−2 to +38°C), humidity (40–70% RH), and shock events. NBI coordinates with Evergreen, MSC, and CMA CGM feeder services from Colombo to gateway ports in Jebel Ali, Hamburg, and Los Angeles.",
+    color: "#5e887e",
+    accent: "#007a3e",
+    metrics: [{ label: "Humidity", value: "40–70% RH" }, { label: "Carriers", value: "MSC / Evergreen" }, { label: "Routes", value: "UAE · EU · USA" }],
+    svg: (
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+        <path d="M10 75 Q30 65 50 70 Q70 75 90 65 Q105 58 115 65 L115 90 Q105 85 90 90 Q70 97 50 92 Q30 87 10 95 Z" fill="#deeede" opacity="0.6"/>
+        <path d="M10 80 Q30 70 50 75 Q70 80 90 70 Q105 63 115 70" stroke="#007a3e" strokeWidth="1.5" fill="none" strokeDasharray="3 2" opacity="0.5"/>
+        <rect x="22" y="50" width="50" height="25" rx="4" fill="#0a3920"/>
+        <rect x="26" y="54" width="14" height="17" rx="2" fill="#007a3e" opacity="0.6"/>
+        <rect x="43" y="54" width="14" height="17" rx="2" fill="#007a3e" opacity="0.6"/>
+        <rect x="60" y="54" width="8" height="17" rx="2" fill="#007a3e" opacity="0.4"/>
+        <rect x="18" y="74" width="60" height="5" rx="2" fill="#5e887e"/>
+        <path d="M78 70 L90 58 L90 74 Z" fill="#d9291c" opacity="0.8"/>
+        <circle cx="28" cy="80" r="5" fill="#0a3920" stroke="#deeede" strokeWidth="1.5"/>
+        <circle cx="68" cy="80" r="5" fill="#0a3920" stroke="#deeede" strokeWidth="1.5"/>
+        <line x1="10" y1="90" x2="115" y2="90" stroke="#007a3e" strokeWidth="2" opacity="0.3"/>
+      </svg>
+    ),
   },
 ];
 
@@ -365,36 +489,152 @@ export default function ExportClient() {
       </section>
 
       {/* ============ EXPORT WORKFLOW STEPS ============ */}
-      <section className="mx-auto max-w-6xl px-5 py-12">
-        <div className="text-center max-w-2xl mx-auto mb-12">
+      <section className="mx-auto max-w-6xl px-5 py-16">
+        {/* Section header */}
+        <div className="text-center max-w-2xl mx-auto mb-14">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-nbired">From Agreement to Shipment</p>
-          <h2 className="text-3xl font-extrabold tracking-tight text-nbidark">The NBI Export Protocol</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-nbidark mt-2">The NBI Export Protocol</h2>
           <p className="mt-4 font-serif text-lg leading-relaxed text-nbicocoa">
-            How we ensure batch qualities and import alignment at every step of the logistics pipeline:
+            Five precision stages—from specification alignment to container sealing—ensuring your import arrives compliant, fresh, and on-spec.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          {exportSteps.map((step, idx) => (
-            <div
-              key={step.title}
-              onClick={() => setActiveStep(idx)}
-              className={`press p-6 rounded-2xl border transition-all min-h-[160px] flex flex-col justify-between cursor-pointer ${
-                activeStep === idx
-                  ? "bg-nbidark text-white border-nbidark shadow-md"
-                  : "bg-white border-gray-200 text-nbidark hover:bg-gray-50"
-              }`}
-            >
-              <div className="space-y-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-nbisand block">Step 0{idx + 1}</span>
-                <h4 className="text-sm font-extrabold">{step.title}</h4>
-              </div>
-              <p className={`text-xs leading-relaxed transition-colors ${
-                activeStep === idx ? "text-nbicream/80" : "text-nbicocoa/80"
-              }`}>
-                {step.desc}
+        {/* Step Selector Row with Connector Line */}
+        <div className="relative mb-10">
+          {/* Horizontal connector */}
+          <div className="hidden lg:block absolute top-[52px] left-[10%] right-[10%] h-0.5 bg-gray-200 z-0" />
+          <div
+            className="hidden lg:block absolute top-[52px] h-0.5 bg-nbigreen z-0 transition-all duration-500 ease-out"
+            style={{ left: "10%", width: `${(activeStep / (exportSteps.length - 1)) * 80}%` }}
+          />
+
+          <div className="grid grid-cols-5 gap-2 relative z-10">
+            {exportSteps.map((step, idx) => (
+              <button
+                key={step.step}
+                onClick={() => setActiveStep(idx)}
+                className={`press flex flex-col items-center gap-2 group cursor-pointer`}
+              >
+                {/* Icon bubble */}
+                <div
+                  className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-md transition-all duration-300 border-2 ${
+                    activeStep === idx
+                      ? "scale-110 border-nbigreen shadow-nbigreen/30 shadow-lg"
+                      : "border-gray-200 bg-white hover:border-nbigreen/40 hover:scale-105"
+                  }`}
+                  style={{ background: activeStep === idx ? step.color : "white" }}
+                >
+                  <div className={`w-9 h-9 transition-all duration-300 ${activeStep === idx ? "opacity-100" : "opacity-70"}`}>
+                    {step.svg}
+                  </div>
+                </div>
+                {/* Step label */}
+                <div className="text-center">
+                  <span className={`block text-[9px] font-bold uppercase tracking-widest transition-colors ${activeStep === idx ? "text-nbigreen" : "text-nbisand"}`}>
+                    Step {step.step}
+                  </span>
+                  <span className={`block text-[11px] font-extrabold leading-tight transition-colors ${activeStep === idx ? "text-nbidark" : "text-nbicocoa/70"}`}>
+                    {step.title}
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Expanded Detail Panel */}
+        <div
+          key={activeStep}
+          className="animate-fade-in rounded-3xl overflow-hidden shadow-xl border border-gray-100 grid md:grid-cols-2"
+        >
+          {/* Left: SVG Illustration */}
+          <div
+            className="relative flex items-center justify-center p-10 min-h-[280px]"
+            style={{ background: `${exportSteps[activeStep].color}` }}
+          >
+            {/* Subtle grid lines */}
+            <div className="absolute inset-0 opacity-10"
+              style={{ backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 30px,rgba(255,255,255,.2) 30px,rgba(255,255,255,.2) 31px),repeating-linear-gradient(90deg,transparent,transparent 30px,rgba(255,255,255,.2) 30px,rgba(255,255,255,.2) 31px)" }}
+            />
+            <div className="relative w-44 h-44 drop-shadow-2xl">
+              {exportSteps[activeStep].svg}
+            </div>
+            {/* Step badge */}
+            <div className="absolute top-5 left-5 bg-white/10 border border-white/20 rounded-xl px-3 py-1.5 backdrop-blur-sm">
+              <span className="text-[10px] font-black uppercase tracking-widest text-white">Step {exportSteps[activeStep].step}</span>
+            </div>
+            {/* Metrics row at bottom */}
+            <div className="absolute bottom-0 left-0 right-0 flex">
+              {exportSteps[activeStep].metrics.map((m) => (
+                <div key={m.label} className="flex-1 border-t border-r last:border-r-0 border-white/10 bg-black/20 backdrop-blur-sm px-3 py-2 text-center">
+                  <p className="text-[9px] font-bold uppercase tracking-wider text-white/50">{m.label}</p>
+                  <p className="text-sm font-extrabold text-white mt-0.5">{m.value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: Text Detail */}
+          <div className="bg-white p-8 md:p-10 flex flex-col justify-between">
+            <div>
+              <span
+                className="inline-block text-[9px] font-black uppercase tracking-[0.2em] px-2.5 py-1 rounded-full mb-4"
+                style={{ background: `${exportSteps[activeStep].accent}18`, color: exportSteps[activeStep].accent }}
+              >
+                {exportSteps[activeStep].subtitle}
+              </span>
+              <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-nbidark">
+                {exportSteps[activeStep].title}
+              </h3>
+              <p className="mt-2 text-sm font-semibold text-nbisand">{exportSteps[activeStep].desc}</p>
+              <p className="mt-4 text-sm leading-relaxed text-nbicocoa font-serif">
+                {exportSteps[activeStep].detail}
               </p>
             </div>
+
+            {/* Navigation arrows */}
+            <div className="mt-8 flex items-center justify-between">
+              <button
+                onClick={() => setActiveStep(Math.max(0, activeStep - 1))}
+                disabled={activeStep === 0}
+                className="press flex items-center gap-2 text-xs font-bold text-nbisand hover:text-nbidark disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-colors"
+              >
+                <svg className="w-4 h-4 rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                Previous
+              </button>
+              <div className="flex gap-1.5">
+                {exportSteps.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveStep(i)}
+                    className={`press w-1.5 h-1.5 rounded-full transition-all duration-300 cursor-pointer ${i === activeStep ? "bg-nbigreen w-5" : "bg-gray-300 hover:bg-gray-400"}`}
+                  />
+                ))}
+              </div>
+              <button
+                onClick={() => setActiveStep(Math.min(exportSteps.length - 1, activeStep + 1))}
+                disabled={activeStep === exportSteps.length - 1}
+                className="press flex items-center gap-2 text-xs font-bold text-nbisand hover:text-nbidark disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-colors"
+              >
+                Next
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile step pills */}
+        <div className="flex lg:hidden flex-wrap gap-2 mt-6 justify-center">
+          {exportSteps.map((step, idx) => (
+            <button
+              key={step.step}
+              onClick={() => setActiveStep(idx)}
+              className={`press px-3 py-1.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer ${
+                activeStep === idx ? "bg-nbidark text-white border-nbidark" : "bg-white text-nbicocoa border-gray-200 hover:border-nbigreen/40"
+              }`}
+            >
+              {step.step}. {step.title}
+            </button>
           ))}
         </div>
       </section>
