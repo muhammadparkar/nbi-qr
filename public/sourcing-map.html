@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBI Sourcing Map</title>
+  <!-- Leaflet CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <style>
+    html, body, #map {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #f4f6f5;
+    }
+    /* Custom styling for Leaflet controls & markers */
+    .leaflet-control-zoom {
+      border: 1px solid rgba(0,0,0,0.1) !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+      border-radius: 8px !important;
+      overflow: hidden;
+    }
+    .leaflet-bar a {
+      background-color: #ffffff !important;
+      color: #1e1b18 !important;
+      border-bottom: 1px solid #f4f4f4 !important;
+    }
+    /* Pulse Marker Icon */
+    .pulse-icon {
+      background: #d9291c;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 6px rgba(217, 41, 28, 0.3), 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    /* Tracer icon */
+    .tracer-icon {
+      background: #d9291c;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #d9291c, 0 0 14px rgba(217, 41, 28, 0.5);
+    }
+    /* Tooltip styling */
+    .custom-tooltip {
+      background: #1e1b18 !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-radius: 6px !important;
+      font-family: sans-serif !important;
+      font-size: 10px !important;
+      font-weight: bold !important;
+      padding: 4px 8px !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
+    }
+    .custom-tooltip::before {
+      border-top-color: #1e1b18 !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script>
+    // Sourcing Coordinates
+    var hqCoords = [8.3114, 80.4037]; // Anuradhapura (Negama)
+    var locations = {
+      anuradhapura: { coords: hqCoords, zoom: 9, name: "Negama HQ & Processing" },
+      galle: { coords: [6.0535, 80.2183], zoom: 10, name: "Galle Cinnamon Farms" },
+      kandy: { coords: [7.2906, 80.6337], zoom: 11, name: "Kandy Garden Pepper" },
+      matale: { coords: [7.4675, 80.6234], zoom: 11, name: "Matale Turmeric Crops" }
+    };
+
+    // Initialize Map with Sri Lanka Center
+    var map = L.map('map', {
+      zoomControl: true,
+      attributionControl: false
+    }).setView([7.8731, 80.7718], 8);
+
+    // CartoDB Positron Elegant Light Tiles
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      maxZoom: 19
+    }).addTo(map);
+
+    // Keep track of layers
+    var currentPolyline = null;
+    var tracerMarker = null;
+    var activeMarker = null;
+    var hqMarker = null;
+    var animationFrameId = null;
+
+    // Draw HQ Marker
+    var hqIcon = L.divIcon({
+      className: 'pulse-icon',
+      iconSize: [12, 12],
+      iconAnchor: [6, 6]
+    });
+    hqMarker = L.marker(hqCoords, { icon: hqIcon }).addTo(map)
+      .bindTooltip("Negama HQ", { permanent: true, direction: 'top', className: 'custom-tooltip' });
+
+    // Handle postMessage Events from Parent React App
+    window.addEventListener('message', function (event) {
+      if (event.data && event.data.action === 'setHotspot') {
+        var spotId = event.data.id;
+        var spot = locations[spotId];
+        if (spot) {
+          updateSourcingView(spotId, spot);
+        }
+      }
+    });
+
+    function updateSourcingView(id, spot) {
+      // Clear previous overlays
+      if (currentPolyline) map.removeLayer(currentPolyline);
+      if (tracerMarker) map.removeLayer(tracerMarker);
+      if (activeMarker) map.removeLayer(activeMarker);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+
+      // Pan to location
+      map.setView(spot.coords, spot.zoom, {
+        animate: true,
+        duration: 1.5
+      });
+
+      // If it's not HQ itself, draw the route and animate tracer
+      if (id !== 'anuradhapura') {
+        // Draw active destination marker
+        var activeIcon = L.divIcon({
+          className: 'pulse-icon',
+          iconSize: [12, 12],
+          iconAnchor: [6, 6]
+        });
+        activeMarker = L.marker(spot.coords, { icon: activeIcon }).addTo(map)
+          .bindTooltip(spot.name, { permanent: true, direction: 'top', className: 'custom-tooltip' });
+
+        // Calculate a nice Bezier curved road path
+        var routePoints = getBezierRoute(hqCoords, spot.coords, 80);
+
+        // Draw Polyline
+        currentPolyline = L.polyline(routePoints, {
+          color: '#d9291c',
+          weight: 3,
+          opacity: 0.8,
+          dashArray: '4, 8'
+        }).addTo(map);
+
+        // Create Animated Tracer
+        var tracerIcon = L.divIcon({
+          className: 'tracer-icon',
+          iconSize: [10, 10],
+          iconAnchor: [5, 5]
+        });
+        tracerMarker = L.marker(routePoints[0], { icon: tracerIcon }).addTo(map);
+
+        // Animate Tracer Loop
+        var step = 0;
+        var speed = 0.25; // Speed multiplier
+        function animate() {
+          step += speed;
+          if (step >= routePoints.length) {
+            step = 0;
+          }
+          var index = Math.floor(step);
+          tracerMarker.setLatLng(routePoints[index]);
+          animationFrameId = requestAnimationFrame(animate);
+        }
+        animate();
+      }
+    }
+
+    // Bezier curve calculation
+    function getBezierRoute(p1, p2, count) {
+      var midLat = (p1[0] + p2[0]) / 2;
+      var midLng = (p1[1] + p2[1]) / 2;
+      // Slight bend based on distance
+      var offsetLat = midLat + (p2[1] - p1[1]) * 0.08;
+      var offsetLng = midLng - (p2[0] - p1[0]) * 0.08;
+      var cp = [offsetLat, offsetLng];
+      
+      var points = [];
+      for (var i = 0; i <= count; i++) {
+        var t = i / count;
+        var lat = (1 - t) * (1 - t) * p1[0] + 2 * (1 - t) * t * cp[0] + t * t * p2[0];
+        var lng = (1 - t) * (1 - t) * p1[1] + 2 * (1 - t) * t * cp[1] + t * t * p2[1];
+        points.push([lat, lng]);
+      }
+      return points;
+    }
+  </script>
+</body>
+</html>

@@ -4,6 +4,16 @@ import { useState } from "react";
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [messageText, setMessageText] = useState(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const queryItems = params.get("items");
+      if (queryItems) {
+        return `Hi NBI,\n\nI would like to request an export quote for the following items from the catalog:\n${queryItems}\n\nPlease send us wholesale pricing and freight details.`;
+      }
+    }
+    return "";
+  });
 
   return (
     <form
@@ -12,6 +22,7 @@ export default function ContactForm() {
         e.preventDefault();
         setSent(true);
         e.currentTarget.reset();
+        setMessageText("");
       }}
     >
       <div className="space-y-4">
@@ -50,8 +61,10 @@ export default function ContactForm() {
           <textarea
             id="f-msg"
             name="message"
-            rows={3}
+            rows={5}
             required
+            value={messageText}
+            onChange={(e) => setMessageText(e.target.value)}
             className="mt-1.5 w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-nbigreen focus:border-nbigreen"
             placeholder="Products, quantities, destination market…"
           />
