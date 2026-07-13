@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Lora } from "next/font/google";
 import { SiteNav, SiteFooter } from "./ui";
+import WhatsAppButton from "./whatsapp-button";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -32,6 +33,7 @@ export default function RootLayout({
         <SiteNav />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <WhatsAppButton />
       </body>
     </html>
   );

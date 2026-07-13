@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useMemo } from "react";
 import { ArrowIcon, DotsMark, PageHero } from "../ui";
 import spiceRange from "@/public/products/spice-range.jpeg";
-import ceylonPack from "@/public/products/ceylon-mixture-pack.jpeg";
+import ceylonPack from "@/public/products/ceylon-mixture-front.jpeg";
 
 
 
