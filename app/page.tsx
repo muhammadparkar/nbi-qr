@@ -7,6 +7,7 @@ import { ArrowIcon, CheckItem, DotsMark } from "./ui";
 import heroRange from "@/public/products/hero-range.jpeg";
 import spiceRange from "@/public/products/spice-range.jpeg";
 import ceylonPack from "@/public/products/ceylon-mixture-pack.jpeg";
+import ceylonPackFront from "@/public/products/ceylon-mixture-front.jpeg";
 import ceylonPouches from "@/public/products/ceylon-pouches.jpeg";
 import ceylonShelf from "@/public/products/ceylon-shelf.jpeg";
 
@@ -211,13 +212,13 @@ export default function Home() {
             <div className="md:col-span-5 hero-badge relative mx-auto w-full max-w-sm mt-8 md:mt-0">
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
                 <Image
-                  src={ceylonPack}
+                  src={ceylonPackFront}
                   alt="NBI Ceylon Mixture 200g pack"
                   fill
                   sizes="(min-width: 768px) 24rem, 90vw"
                   placeholder="blur"
                   priority
-                  className="object-cover object-[22%_center]"
+                  className="object-cover"
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent px-5 pt-20 pb-5">
                   <p className="text-[11px] font-bold tracking-[0.3em] uppercase text-nbicream/80">Signature</p>

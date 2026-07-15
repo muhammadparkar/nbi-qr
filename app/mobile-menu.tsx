@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { PhoneLink } from "./ui";
 
 type NavLink = { href: string; label: string };
 
@@ -52,17 +53,7 @@ export default function MobileMenu({ links }: { links: NavLink[] }) {
             {l.label}
           </Link>
         ))}
-        <Link
-          href="/contact"
-          onClick={() => setOpen(false)}
-          tabIndex={open ? 0 : -1}
-          className="press mt-1 flex items-center justify-center gap-2 rounded-xl bg-nbired px-4 py-3 font-bold text-white hover:bg-[#b82217] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-nbired focus-visible:ring-offset-2"
-        >
-          Request a Quote
-          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12l-7.5 7.5M21 12H3" />
-          </svg>
-        </Link>
+        <PhoneLink className="justify-center rounded-xl px-4 py-3 hover:bg-nbicream/50" />
       </div>
     </div>
   );

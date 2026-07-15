@@ -31,6 +31,24 @@ export function LogoMark({ className }: { className: string }) {
   );
 }
 
+export function PhoneLink({ className = "" }: { className?: string }) {
+  return (
+    <a
+      href="tel:+94772338350"
+      className={`press inline-flex items-center gap-2 font-semibold text-nbidark/80 hover:text-nbired cursor-pointer ${className}`}
+    >
+      <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M2.25 6.75c0 8.284 6.716 15 15 15h1.5a2.25 2.25 0 0 0 2.25-2.25v-1.372a1.5 1.5 0 0 0-1.106-1.447l-3.11-.9a1.5 1.5 0 0 0-1.6.44l-.86 1.05a11.25 11.25 0 0 1-5.94-5.94l1.05-.86a1.5 1.5 0 0 0 .44-1.6l-.9-3.11A1.5 1.5 0 0 0 5.622 3H4.25A2 2 0 0 0 2.25 5v1.75Z"
+        />
+      </svg>
+      <span className="text-sm whitespace-nowrap">+94 77 233 8350</span>
+    </a>
+  );
+}
+
 export function ArrowIcon() {
   return (
     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
@@ -107,13 +125,7 @@ export function SiteNav() {
           ))}
         </div>
         <div className="flex items-center gap-1 ml-auto md:ml-0">
-          <Link
-            href="/contact"
-            className="press hidden md:inline-flex items-center gap-2 rounded-xl bg-nbired px-4 py-2.5 text-sm font-bold text-white hover:bg-[#b82217] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-nbired focus-visible:ring-offset-2"
-          >
-            Request a Quote
-            <ArrowIcon />
-          </Link>
+          <PhoneLink className="hidden lg:inline-flex mr-2" />
           <MobileMenu links={navLinks} />
         </div>
       </nav>
