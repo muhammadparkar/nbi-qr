@@ -153,15 +153,15 @@ export default function Home() {
         <div className="relative mx-auto max-w-6xl px-5 pt-28 pb-16 sm:pt-36 md:pt-44 md:pb-28">
           <div className="grid md:grid-cols-12 gap-14 md:gap-10 items-center">
             <div className="md:col-span-10 md:col-start-2 flex flex-col items-center text-center">
-              <h1 className="hero-item font-extrabold tracking-tight text-4xl sm:text-5xl lg:text-6xl leading-[1.02]">
+              <h1 className="hero-item font-extrabold tracking-tight text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.02]">
                 The Island&apos;s Flavor,
                 <br />
                 <span className="font-serif italic font-medium" style={{ color: "#FF5A4C" }}>
                   Ground at the Source.
                 </span>
               </h1>
-              <p className="hero-item mt-6 font-serif text-lg md:text-xl text-nbicream/90 max-w-xl leading-relaxed">
-                Since 1987, New Badriya Industries has milled Sri Lanka&apos;s boldest harvests — and sealed that aroma
+              <p className="hero-item mt-6 font-serif text-lg md:text-xl text-nbicream/90 max-w-2xl leading-relaxed">
+                Since 1987, New Badriya Industries has milled Sri Lanka&apos;s boldest harvests, sealing that aroma
                 into every pack that leaves our gates.
               </p>
 

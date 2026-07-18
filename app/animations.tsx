@@ -15,23 +15,7 @@ export default function Animations() {
       // Content is never pre-hidden: if the intro doesn't run, the hero is simply visible.
       gsap
         .timeline({ defaults: { ease: "power3.out" }, delay: PRELOADER_REVEAL })
-        .fromTo(".hero-item", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.12 })
-        .fromTo(
-          ".hero-badge",
-          { y: 30, opacity: 0, scale: 0.95 },
-          { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: "power3.out" },
-          "-=0.5"
-        );
-
-      // Card stack idle float
-      gsap.to(".hero-badge", {
-        y: -10,
-        duration: 3.2,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: PRELOADER_REVEAL + 1.6,
-      });
+        .fromTo(".hero-item", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.12 });
 
       // Stat counters
       gsap.utils.toArray<HTMLElement>(".stat").forEach((el) => {
@@ -138,7 +122,7 @@ export default function Animations() {
     });
 
     mm.add("(prefers-reduced-motion: reduce)", () => {
-      gsap.set(".reveal, .hero-item, .hero-badge, section h2", { clearProps: "all", opacity: 1 });
+      gsap.set(".reveal, .hero-item, section h2", { clearProps: "all", opacity: 1 });
       // Storyline falls back to a vertical stack — drop the horizontal layout classes
       document.querySelector(".story-track")?.classList.remove("md:flex-row", "md:w-max", "md:flex-1");
       document.querySelector(".story-stage")?.classList.remove("md:h-screen");
