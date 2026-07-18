@@ -94,7 +94,7 @@ const exportSteps: ExportStep[] = [
     title: "Specification Align",
     subtitle: "Quality Benchmarking",
     desc: "Review mesh sizes, moisture parameters, and color values matching destination imports.",
-    detail: "Our trade team reviews buyer specification sheets—EU Reg 2023/915, FDA GRAS, SFDA 1516—cross-referencing mesh grade (40–120 mesh), moisture caps (≤11%), and SHU/ASTA color values before any production slot is confirmed.",
+    detail: "Our trade team reviews buyer specification sheets (EU Reg 2023/915, FDA GRAS, SFDA 1516), cross-referencing mesh grade (40–120 mesh), moisture caps (≤11%), and SHU/ASTA color values before any production slot is confirmed.",
     color: "#0a3920",
     accent: "#007a3e",
     metrics: [{ label: "Mesh Range", value: "40–120 mesh" }, { label: "Moisture Cap", value: "≤ 11%" }, { label: "SLA", value: "24 hrs" }],
@@ -144,7 +144,7 @@ const exportSteps: ExportStep[] = [
     title: "Packaging & Flush",
     subtitle: "Freshness Seal",
     desc: "Sealed in high-barrier bags with nitrogen gas replacement to extend freshness.",
-    detail: "Filled in nitrogen-flushed 3-layer laminate pouches (BOPP/ALU/PE) under ≤5% residual O₂ atmosphere. Heat-sealed with inline seal-check sensors. Each pallet wrapped in stretch film with desiccant sachets—moisture barrier rated ≥ 1.5 g/m²/day.",
+    detail: "Filled in nitrogen-flushed 3-layer laminate pouches (BOPP/ALU/PE) under ≤5% residual O₂ atmosphere. Heat-sealed with inline seal-check sensors. Each pallet wrapped in stretch film with desiccant sachets, providing a moisture barrier rated ≥ 1.5 g/m²/day.",
     color: "#403638",
     accent: "#007a3e",
     metrics: [{ label: "O₂ Residual", value: "≤ 5%" }, { label: "Barrier", value: "1.5 g/m²/day" }, { label: "Layers", value: "3-ply laminate" }],
@@ -495,7 +495,7 @@ export default function ExportClient() {
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-nbired">From Agreement to Shipment</p>
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-nbidark mt-2">The NBI Export Protocol</h2>
           <p className="mt-4 font-serif text-lg leading-relaxed text-nbicocoa">
-            Five precision stages—from specification alignment to container sealing—ensuring your import arrives compliant, fresh, and on-spec.
+            Five precision stages, spanning from specification alignment to container sealing, ensuring your import arrives compliant, fresh, and on-spec.
           </p>
         </div>
 
@@ -648,7 +648,7 @@ export default function ExportClient() {
               <span className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: "#7BC9A0" }}>Partnerships</span>
               <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mt-2">Customized Packing &amp; Private Label</h2>
               <p className="mt-6 font-serif text-lg leading-relaxed text-nbicream/90">
-                NBI offers robust packaging configurations for import buyers—ranging from retail pouches, jars, and kraft bags with custom bilingual artwork to standard 25kg bulk woven export sacks.
+                NBI offers robust packaging configurations for import buyers, ranging from retail pouches, jars, and kraft bags with custom bilingual artwork to standard 25kg bulk woven export sacks.
               </p>
               <ul className="mt-8 space-y-3 text-sm">
                 <CheckItem iconClass="text-[#7BC9A0]">FDA, SFDA &amp; EU specification matching</CheckItem>

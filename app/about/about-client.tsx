@@ -276,7 +276,7 @@ export default function AboutClient() {
               <p>Dear Friends and Partners,</p>
               <p>
                 When I setup our first modest milling stone in Negama in 1987, Sri Lanka was undergoing immense changes. 
-                But some things on this island remain eternal—the richness of our soil, the intensity of our sun, and the 
+                But some things on this island remain eternal: the richness of our soil, the intensity of our sun, and the 
                 pride we take in our cooking. 
               </p>
               <p>
@@ -530,7 +530,7 @@ export default function AboutClient() {
                       <line key={`h${row}`} x1="10" y1={20 + row * 20} x2="190" y2={20 + row * 20}
                         stroke="#d6b99a" strokeWidth="0.5" strokeDasharray={`${4 - cinnamonGrind * 0.8} ${4 - cinnamonGrind * 0.8}`} opacity="0.4"/>
                     ))}
-                    {/* Particles — bigger & fewer at low grind, tiny & many at high grind */}
+                    {/* Particles: bigger & fewer at low grind, tiny & many at high grind */}
                     {Array.from({ length: [5, 12, 22, 40][cinnamonGrind] }, (_, i) => {
                       const r = [9, 5.5, 3, 1.5][cinnamonGrind];
                       const cx = 15 + (i % ([5,4,6,8][cinnamonGrind])) * ((170) / ([4,3,5,7][cinnamonGrind]));

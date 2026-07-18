@@ -77,7 +77,7 @@ export default function ContactForm() {
         </button>
         {sent && (
           <p className="text-sm font-semibold text-nbigreen" role="status">
-            Thank you — your inquiry has been noted. We&apos;ll be in touch.
+            Thank you, your inquiry has been noted. We&apos;ll be in touch.
           </p>
         )}
       </div>
