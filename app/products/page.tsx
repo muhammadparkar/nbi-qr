@@ -216,7 +216,7 @@ export default function ProductsPage() {
   // Quick View form state
   const [formQty, setFormQty] = useState(250);
   const [formUnit, setFormUnit] = useState("kg");
-  const [formPack, setFormPack] = useState("1kg Aluminium Foil Pouch");
+  const [formPack, setFormPack] = useState("1kg Foil Pouches (Retail)");
 
   const categoryList = useMemo(() => ["All", ...new Set(allProducts.map((p) => p.category))], []);
 
@@ -365,10 +365,10 @@ export default function ProductsPage() {
     setFormUnit("kg");
     setFormPack(
       prod.category === "Spice Products" || prod.category === "Masala Range"
-        ? "1kg Aluminium Foil Pouch"
+        ? "1kg Foil Pouches (Retail)"
         : prod.category === "Whole Spices"
         ? "25kg Multi-Layer Kraft Sack"
-        : "Retail Pack (Bags / Master Cartons)"
+        : "50kg Jute Hessian Bags"
     );
   };
 
@@ -850,7 +850,7 @@ export default function ProductsPage() {
                     src={selectedProduct.img}
                     alt={selectedProduct.imgAlt}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                 </div>
 
