@@ -2,10 +2,94 @@
 
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { ArrowIcon, DotsMark, PageHero } from "../ui";
-import spiceRange from "@/public/products/spice-range.jpeg";
 import ceylonPack from "@/public/products/ceylon-mixture-front.jpeg";
+import cardamomPowderImg from "@/public/products/cardamom-powder.png";
+import clovesImg from "@/public/products/cloves.png";
+import mixedSpicePowderImg from "@/public/products/mixed-spice-powder.png";
+import mustardSeedsImg from "@/public/products/mustard-seeds.png";
+import ceylonCinnamonQuillsImg from "@/public/products/ceylon-cinnamon-quills.png";
+import cinnamonPowderImg from "@/public/products/cinnamon-powder.png";
+import fennelSeedsImg from "@/public/products/fennel-seeds.png";
+import corianderSeedsImg from "@/public/products/coriander-seeds.png";
+import bbqMasalaImg from "@/public/products/bbq-masala.png";
+import garlicPowderImg from "@/public/products/garlic-powder.png";
+
+function CustomSelect({
+  value,
+  onChange,
+  options,
+  label,
+  className = "",
+  variant = "pill",
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  options: { value: string; label: string }[];
+  label: string;
+  className?: string;
+  variant?: "pill" | "box";
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [open]);
+
+  const current = options.find((o) => o.value === value);
+
+  return (
+    <div ref={ref} className={`relative ${className}`}>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-label={label}
+        aria-expanded={open}
+        className={`w-full flex items-center justify-between gap-2 border border-gray-300 bg-white pl-4 pr-3.5 py-2.5 text-xs font-bold text-nbidark focus:outline-none focus:ring-2 focus:ring-nbigreen cursor-pointer ${
+          variant === "pill" ? "rounded-full" : "rounded-xl"
+        }`}
+      >
+        {current?.label}
+        <svg
+          className={`w-3.5 h-3.5 text-nbigreen shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          aria-hidden="true"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+      {open && (
+        <div className="absolute right-0 z-30 mt-2 w-full min-w-[10rem] rounded-xl border border-gray-200 bg-white py-1.5 shadow-lg">
+          {options.map((o) => (
+            <button
+              key={o.value}
+              type="button"
+              onClick={() => {
+                onChange(o.value);
+                setOpen(false);
+              }}
+              className={`w-full text-left px-4 py-2 text-xs font-bold cursor-pointer transition-colors ${
+                o.value === value ? "text-nbigreen bg-nbigreen/5" : "text-nbidark hover:bg-gray-50"
+              }`}
+            >
+              {o.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 
 
@@ -17,143 +101,78 @@ const allProducts: {
   img: StaticImageData | string;
   imgAlt: string;
 }[] = [
-  {
-    name: "Ceylon Mixture",
-    category: "Snacks",
-    sizes: "100 g · 200 g",
-    img: ceylonPack,
-    imgAlt: "NBI Ceylon Mixture retail pack",
-  },
-  {
-    name: "Curry Powder",
-    category: "Spice Powders",
-    sizes: "50 g – 1 kg · bulk",
-    img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70",
-    imgAlt: "Curry cooked with fresh coriander",
-  },
-  {
-    name: "Chili Powder",
-    category: "Spice Powders",
-    sizes: "50 g – 1 kg · bulk",
-    img: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=800&q=70",
-    imgAlt: "Fresh red chillies",
-  },
-  {
-    name: "Turmeric Powder",
-    category: "Spice Powders",
-    sizes: "50 g – 1 kg · bulk",
-    img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70",
-    imgAlt: "Turmeric and spices flat lay",
-  },
-  {
-    name: "Black Pepper Powder",
-    category: "Spice Powders",
-    sizes: "50 g – 1 kg · bulk",
-    img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70",
-    imgAlt: "Ground pepper and spices in spoons",
-  },
-  {
-    name: "Garam Masala",
-    category: "Masala Blends",
-    sizes: "50 g – 1 kg · bulk",
-    img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70",
-    imgAlt: "Spice bowls at a market",
-  },
-  {
-    name: "Pure Ceylon Cinnamon",
-    category: "Whole Spices",
-    sizes: "Sticks & powder",
-    img: "https://images.unsplash.com/photo-1587131782738-de30ea91a542?w=800&q=70",
-    imgAlt: "Ceylon cinnamon sticks",
-  },
-  {
-    name: "Pure Ceylon Tea",
-    category: "Tea Products",
-    sizes: "Loose leaf · gift packs",
-    img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70",
-    imgAlt: "Brewed tea with a teapot",
-  },
-  {
-    name: "Spicy Cashews",
-    category: "Snacks",
-    sizes: "100 g · 200 g",
-    img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70",
-    imgAlt: "Roasted cashew nuts in a bowl",
-  },
-  {
-    name: "Desiccated Coconut",
-    category: "Coconut Products",
-    sizes: "Retail & bulk",
-    img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70",
-    imgAlt: "Split fresh coconut",
-  },
-  {
-    name: "Rice Flour",
-    category: "Rice & Grain",
-    sizes: "Retail & bulk",
-    img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=70",
-    imgAlt: "White rice grains",
-  },
-  {
-    name: "Custom Spice Blends",
-    category: "Value-Added",
-    sizes: "Your recipe · OEM",
-    img: spiceRange,
-    imgAlt: "NBI spice pack range",
-  },
-  // Fill out full 50+ product list
-  { name: "Roasted Curry Powder", category: "Spice Powders", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Curry" },
-  { name: "Coriander Powder", category: "Spice Powders", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Coriander" },
-  { name: "Cumin Powder", category: "Spice Powders", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Cumin" },
-  { name: "White Pepper Powder", category: "Spice Powders", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "White pepper" },
-  { name: "Fennel Powder", category: "Spice Powders", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Fennel" },
-  { name: "Mustard Powder", category: "Spice Powders", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Mustard" },
-  { name: "Fenugreek Powder", category: "Spice Powders", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Fenugreek" },
-  { name: "Ginger Powder", category: "Spice Powders", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Ginger" },
-  { name: "Garlic Powder", category: "Spice Powders", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Garlic" },
-  { name: "Cinnamon Powder", category: "Spice Powders", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1587131782738-de30ea91a542?w=800&q=70", imgAlt: "Cinnamon powder" },
-  { name: "Chicken Masala", category: "Masala Blends", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Chicken masala" },
-  { name: "Meat Masala", category: "Masala Blends", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Meat masala" },
-  { name: "Fish Curry Mix", category: "Masala Blends", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Fish curry" },
-  { name: "Biryani Masala", category: "Masala Blends", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Biryani" },
-  { name: "BBQ Masala", category: "Masala Blends", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "BBQ" },
-  { name: "Tandoori Masala", category: "Masala Blends", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Tandoori" },
-  { name: "Fried Rice Seasoning", category: "Masala Blends", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Fried rice" },
-  { name: "All-Purpose Seasoning", category: "Masala Blends", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "All-purpose" },
-  { name: "Black Pepper", category: "Whole Spices", sizes: "Whole · ground", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Black pepper" },
-  { name: "Cloves", category: "Whole Spices", sizes: "Whole", img: "https://images.unsplash.com/photo-1587131782738-de30ea91a542?w=800&q=70", imgAlt: "Cloves" },
-  { name: "Cardamom", category: "Whole Spices", sizes: "Whole", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Cardamom" },
-  { name: "Cumin Seeds", category: "Whole Spices", sizes: "Whole", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Cumin seeds" },
-  { name: "Coriander Seeds", category: "Whole Spices", sizes: "Whole", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Coriander seeds" },
-  { name: "Fennel Seeds", category: "Whole Spices", sizes: "Whole", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Fennel seeds" },
-  { name: "Mustard Seeds", category: "Whole Spices", sizes: "Whole", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Mustard seeds" },
-  { name: "Fenugreek Seeds", category: "Whole Spices", sizes: "Whole", img: "https://images.unsplash.com/photo-1587131782738-de30ea91a542?w=800&q=70", imgAlt: "Fenugreek seeds" },
-  { name: "Dried Red Chili", category: "Whole Spices", sizes: "Whole", img: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=800&q=70", imgAlt: "Red chili" },
-  { name: "Black Tea", category: "Tea Products", sizes: "Loose · powder", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Black tea" },
-  { name: "Green Tea", category: "Tea Products", sizes: "Loose · powder", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Green tea" },
-  { name: "Tea Powder", category: "Tea Products", sizes: "100 g – 1 kg", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Tea powder" },
-  { name: "Flavoured Tea", category: "Tea Products", sizes: "Retail", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Flavoured tea" },
-  { name: "Premium Tea Gift Packs", category: "Tea Products", sizes: "Gift set", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Gift packs" },
-  { name: "Spicy Mixture", category: "Snacks", sizes: "100 g · 200 g", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Spicy mixture" },
-  { name: "Roasted Peanuts", category: "Snacks", sizes: "100 g · 200 g", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Peanuts" },
-  { name: "Masala Peanuts", category: "Snacks", sizes: "100 g · 200 g", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Masala peanuts" },
-  { name: "Cashew Nuts", category: "Snacks", sizes: "100 g · 200 g", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Cashews" },
-  { name: "Chickpeas", category: "Snacks", sizes: "100 g · 200 g", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Chickpeas" },
-  { name: "Murukku", category: "Snacks", sizes: "100 g · 200 g", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Murukku" },
-  { name: "Tapioca Chips", category: "Snacks", sizes: "100 g · 200 g", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Tapioca chips" },
-  { name: "Banana Chips", category: "Snacks", sizes: "100 g · 200 g", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Banana chips" },
-  { name: "Coconut Milk Powder", category: "Coconut Products", sizes: "200 g – 1 kg", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Coconut milk" },
-  { name: "Coconut Flour", category: "Coconut Products", sizes: "200 g – 1 kg", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Coconut flour" },
-  { name: "Virgin Coconut Oil", category: "Coconut Products", sizes: "500 ml · 1 L", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Coconut oil" },
-  { name: "Roasted Rice Flour", category: "Rice & Grain", sizes: "500 g · 1 kg", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=70", imgAlt: "Rice flour" },
-  { name: "String Hopper Flour", category: "Rice & Grain", sizes: "500 g · 1 kg", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=70", imgAlt: "String hopper" },
-  { name: "Pittu Flour", category: "Rice & Grain", sizes: "500 g · 1 kg", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=70", imgAlt: "Pittu flour" },
-  { name: "Instant Curry Mix", category: "Value-Added", sizes: "100 g – 500 g", img: spiceRange, imgAlt: "Curry mix" },
-  { name: "Ready-to-Cook Mix", category: "Value-Added", sizes: "100 g – 500 g", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Ready-to-cook" },
-  { name: "Recipe Mix", category: "Value-Added", sizes: "100 g – 500 g", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Recipe mix" },
-  { name: "Soup Seasoning", category: "Value-Added", sizes: "100 g – 500 g", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Soup seasoning" },
-  { name: "Marinade Mix", category: "Value-Added", sizes: "100 g – 500 g", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Marinade" },
-  { name: "Mixed Masala", category: "Masala Blends", sizes: "50 g – 1 kg", img: "https://images.unsplash.com/photo-1587131782738-de30ea91a542?w=800&q=70", imgAlt: "Mixed masala" },
+  // Spice Products (Powders)
+  { name: "Curry Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Curry powder" },
+  { name: "Roasted Curry Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Roasted curry powder" },
+  { name: "Chilli Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=800&q=70", imgAlt: "Chilli powder" },
+  { name: "Roasted Chilli Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=800&q=70", imgAlt: "Roasted chilli powder" },
+  { name: "Turmeric Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Turmeric powder" },
+  { name: "Black Pepper Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Black pepper powder" },
+  { name: "White Pepper Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "White pepper powder" },
+  { name: "Coriander Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Coriander powder" },
+  { name: "Cumin Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Cumin powder" },
+  { name: "Fennel Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Fennel powder" },
+  { name: "Cinnamon Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: cinnamonPowderImg, imgAlt: "NBI Ceylon Cinnamon Powder" },
+  { name: "Cardamom Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: cardamomPowderImg, imgAlt: "NBI Premium Cardamom Powder" },
+  { name: "Ginger Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Ginger powder" },
+  { name: "Garlic Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: garlicPowderImg, imgAlt: "NBI Premium Garlic Powder" },
+  { name: "Mixed Spice Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: mixedSpicePowderImg, imgAlt: "NBI Arabic Mixed Spice" },
+
+  // Whole Spices
+  { name: "Ceylon Cinnamon Quills", category: "Whole Spices", sizes: "Sticks · bulk", img: ceylonCinnamonQuillsImg, imgAlt: "NBI Premium Ceylon Cinnamon Quills" },
+  { name: "Black Pepper", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Black pepper" },
+  { name: "White Pepper", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "White pepper" },
+  { name: "Cloves", category: "Whole Spices", sizes: "Whole · bulk", img: clovesImg, imgAlt: "NBI Premium Cloves" },
+  { name: "Green Cardamom", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Green cardamom" },
+  { name: "Coriander Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: corianderSeedsImg, imgAlt: "NBI Premium Coriander Seeds" },
+  { name: "Cumin Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Cumin seeds" },
+  { name: "Fennel Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: fennelSeedsImg, imgAlt: "NBI Premium Fennel Seeds" },
+  { name: "Mustard Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: mustardSeedsImg, imgAlt: "NBI Premium Mustard Seeds" },
+  { name: "Fenugreek Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Fenugreek seeds" },
+  { name: "Dried Red Chilli", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=800&q=70", imgAlt: "Dried red chilli" },
+  { name: "Bay Leaves", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1587131782738-de30ea91a542?w=800&q=70", imgAlt: "Bay leaves" },
+
+  // Masala Range
+  { name: "Chicken Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Chicken masala" },
+  { name: "Meat Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Meat masala" },
+  { name: "Fish Curry Mix", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Fish curry mix" },
+  { name: "Biryani Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Biryani masala" },
+  { name: "BBQ Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: bbqMasalaImg, imgAlt: "NBI Premium BBQ Masala" },
+  { name: "Garam Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Garam masala" },
+  { name: "Tandoori Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Tandoori masala" },
+  { name: "Sambar Powder", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Sambar powder" },
+  { name: "Rasam Powder", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Rasam powder" },
+
+  // Coconut Products
+  { name: "Desiccated Coconut", category: "Coconut Products", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Desiccated coconut" },
+  { name: "Coconut Milk Powder", category: "Coconut Products", sizes: "200 g – 1 kg", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Coconut milk powder" },
+  { name: "Coconut Cream", category: "Coconut Products", sizes: "200 ml – 1 L", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Coconut cream" },
+  { name: "Virgin Coconut Oil", category: "Coconut Products", sizes: "500 ml · 1 L", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Virgin coconut oil" },
+  { name: "Coconut Vinegar", category: "Coconut Products", sizes: "500 ml · 1 L", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Coconut vinegar" },
+
+  // Rice & Grains
+  { name: "Basmati Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=70", imgAlt: "Basmati rice" },
+  { name: "Samba Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=70", imgAlt: "Samba rice" },
+  { name: "Red Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=70", imgAlt: "Red rice" },
+  { name: "White Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=70", imgAlt: "White rice" },
+
+  // Pulses & Dry Foods
+  { name: "Red Lentils", category: "Pulses & Dry Foods", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Red lentils" },
+  { name: "Chickpeas", category: "Pulses & Dry Foods", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Chickpeas" },
+  { name: "Green Gram", category: "Pulses & Dry Foods", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Green gram" },
+  { name: "Cowpea", category: "Pulses & Dry Foods", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Cowpea" },
+  { name: "White Beans", category: "Pulses & Dry Foods", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "White beans" },
+  { name: "Green Peas", category: "Pulses & Dry Foods", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Green peas" },
+
+  // Tea & Beverages
+  { name: "Ceylon Black Tea", category: "Tea & Beverages", sizes: "Loose leaf · gift packs", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Ceylon black tea" },
+  { name: "Green Tea", category: "Tea & Beverages", sizes: "Loose leaf · gift packs", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Green tea" },
+  { name: "Flavoured Tea", category: "Tea & Beverages", sizes: "Loose leaf · gift packs", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Flavoured tea" },
+  { name: "Tea Bags", category: "Tea & Beverages", sizes: "Box of 25 · 50 · 100", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Tea bags" },
+  { name: "Instant Coffee", category: "Tea & Beverages", sizes: "50 g – 500 g", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Instant coffee" },
+
+  // Retail flagship packs
+  { name: "Ceylon Mixture", category: "Snacks", sizes: "100 g · 200 g", img: ceylonPack, imgAlt: "NBI Ceylon Mixture retail pack" },
 ];
 
 
@@ -342,10 +361,10 @@ export default function ProductsPage() {
   // Set default values in Quick View drawer when product opens
   const openQuickView = (prod: typeof allProducts[0]) => {
     setSelectedProduct(prod);
-    setFormQty(prod.category === "Snacks" || prod.category === "Tea Products" ? 100 : 250);
+    setFormQty(prod.category === "Snacks" || prod.category === "Tea & Beverages" ? 100 : 250);
     setFormUnit("kg");
     setFormPack(
-      prod.category === "Spice Powders" || prod.category === "Masala Blends"
+      prod.category === "Spice Products" || prod.category === "Masala Range"
         ? "1kg Aluminium Foil Pouch"
         : prod.category === "Whole Spices"
         ? "25kg Multi-Layer Kraft Sack"
@@ -428,18 +447,19 @@ export default function ProductsPage() {
             </div>
 
             {/* Sort */}
-            <select
+            <CustomSelect
+              className="shrink-0 w-44"
+              label="Sort products"
               value={sortBy}
-              onChange={(e) => {
-                setSortBy(e.target.value);
+              onChange={(v) => {
+                setSortBy(v);
                 setPage(1);
               }}
-              aria-label="Sort products"
-              className="shrink-0 rounded-full border border-gray-300 bg-white px-4 py-2.5 text-xs font-bold text-nbidark focus:outline-none focus:ring-2 focus:ring-nbigreen cursor-pointer"
-            >
-              <option value="name">Name (A–Z)</option>
-              <option value="category">Category Group</option>
-            </select>
+              options={[
+                { value: "name", label: "Name (A–Z)" },
+                { value: "category", label: "Category Group" },
+              ]}
+            />
           </div>
 
           {hasActiveFilters && (
@@ -464,7 +484,7 @@ export default function ProductsPage() {
 
         {/* Grid */}
         {paged.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 content-start" style={{ minHeight: "60vh" }}>
             {paged.map((p) => (
               <div
                 key={p.name}
@@ -920,35 +940,39 @@ export default function ProductsPage() {
                       />
                     </div>
                     <div>
-                      <label htmlFor="modal-unit" className="text-[9px] font-bold text-nbisand uppercase tracking-wider block">Unit</label>
-                      <select
-                        id="modal-unit"
+                      <label className="text-[9px] font-bold text-nbisand uppercase tracking-wider block">Unit</label>
+                      <CustomSelect
+                        className="mt-1"
+                        variant="box"
+                        label="Unit"
                         value={formUnit}
-                        onChange={(e) => setFormUnit(e.target.value)}
-                        className="mt-1 w-full bg-white border border-gray-300 rounded-xl px-3 py-2.5 text-xs font-bold text-nbidark focus:outline-none focus:ring-2 focus:ring-nbigreen"
-                      >
-                        <option value="kg">kg (Kilograms)</option>
-                        <option value="MT">MT (Metric Tons)</option>
-                        <option value="master cartons">Master Cartons</option>
-                        <option value="retail units">Retail Units</option>
-                      </select>
+                        onChange={setFormUnit}
+                        options={[
+                          { value: "kg", label: "kg (Kilograms)" },
+                          { value: "MT", label: "MT (Metric Tons)" },
+                          { value: "master cartons", label: "Master Cartons" },
+                          { value: "retail units", label: "Retail Units" },
+                        ]}
+                      />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="modal-pack" className="text-[9px] font-bold text-nbisand uppercase tracking-wider block">Packaging Option</label>
-                    <select
-                      id="modal-pack"
+                    <label className="text-[9px] font-bold text-nbisand uppercase tracking-wider block">Packaging Option</label>
+                    <CustomSelect
+                      className="mt-1"
+                      variant="box"
+                      label="Packaging Option"
                       value={formPack}
-                      onChange={(e) => setFormPack(e.target.value)}
-                      className="mt-1 w-full bg-white border border-gray-300 rounded-xl px-3 py-2.5 text-xs font-bold text-nbidark focus:outline-none focus:ring-2 focus:ring-nbigreen"
-                    >
-                      <option value="1kg Foil Pouches (Retail)">1kg Foil Pouches (Retail-ready)</option>
-                      <option value="250g Shaker Jars (Retail)">250g Shaker Jars (Retail-ready)</option>
-                      <option value="25kg Multi-Layer Kraft Sack">25kg Multi-Layer Kraft Sack (Industrial)</option>
-                      <option value="50kg Jute Hessian Bags">50kg Jute Hessian Bags (Industrial)</option>
-                      <option value="Custom OEM Brand Box">Custom OEM Private Label Brand Packaging</option>
-                    </select>
+                      onChange={setFormPack}
+                      options={[
+                        { value: "1kg Foil Pouches (Retail)", label: "1kg Foil Pouches (Retail-ready)" },
+                        { value: "250g Shaker Jars (Retail)", label: "250g Shaker Jars (Retail-ready)" },
+                        { value: "25kg Multi-Layer Kraft Sack", label: "25kg Multi-Layer Kraft Sack (Industrial)" },
+                        { value: "50kg Jute Hessian Bags", label: "50kg Jute Hessian Bags (Industrial)" },
+                        { value: "Custom OEM Brand Box", label: "Custom OEM Private Label Brand Packaging" },
+                      ]}
+                    />
                   </div>
                 </div>
               </div>

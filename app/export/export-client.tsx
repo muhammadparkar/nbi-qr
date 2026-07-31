@@ -223,6 +223,73 @@ const exportSteps: ExportStep[] = [
   },
 ];
 
+function DestinationSelect({
+  value,
+  onChange,
+  options,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  options: { value: string; label: string }[];
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [open]);
+
+  const current = options.find((o) => o.value === value);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-label="Port of Destination"
+        aria-expanded={open}
+        className="press w-full flex items-center justify-between gap-2 p-4 rounded-xl border border-gray-200 bg-gray-50 text-sm font-bold text-nbidark focus:outline-none focus:ring-2 focus:ring-nbigreen cursor-pointer"
+      >
+        {current?.label}
+        <svg
+          className={`w-4 h-4 text-nbigreen shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          aria-hidden="true"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+      {open && (
+        <div className="absolute left-0 right-0 z-30 mt-2 rounded-xl border border-gray-200 bg-white py-1.5 shadow-lg max-h-64 overflow-y-auto">
+          {options.map((o) => (
+            <button
+              key={o.value}
+              type="button"
+              onClick={() => {
+                onChange(o.value);
+                setOpen(false);
+              }}
+              className={`w-full text-left px-4 py-2.5 text-sm font-bold cursor-pointer transition-colors ${
+                o.value === value ? "text-nbigreen bg-nbigreen/5" : "text-nbidark hover:bg-gray-50"
+              }`}
+            >
+              {o.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ExportClient() {
   const [selectedDest, setSelectedDest] = useState<keyof typeof destinations>("qatar");
   const [selectedVol, setSelectedVol] = useState<keyof typeof volumes>("lcl");
@@ -276,21 +343,17 @@ export default function ExportClient() {
 
               {/* Destination Dropdown */}
               <div className="space-y-2">
-                <label htmlFor="destination-select" className="text-xs font-bold uppercase tracking-wider text-nbisand block">
+                <span className="text-xs font-bold uppercase tracking-wider text-nbisand block">
                   1. Port of Destination
-                </label>
-                <select
-                  id="destination-select"
+                </span>
+                <DestinationSelect
                   value={selectedDest}
-                  onChange={(e) => setSelectedDest(e.target.value as keyof typeof destinations)}
-                  className="press w-full p-4 rounded-xl border border-gray-200 bg-gray-50 text-sm font-bold text-nbidark focus:outline-none focus:ring-2 focus:ring-nbigreen cursor-pointer"
-                >
-                  {Object.entries(destinations).map(([key, dest]) => (
-                    <option key={key} value={key}>
-                      {dest.name} ({dest.port.split(" ")[0]})
-                    </option>
-                  ))}
-                </select>
+                  onChange={(v) => setSelectedDest(v as keyof typeof destinations)}
+                  options={Object.entries(destinations).map(([key, dest]) => ({
+                    value: key,
+                    label: `${dest.name} (${dest.port.split(" ")[0]})`,
+                  }))}
+                />
               </div>
 
               {/* Volume Buttons */}
