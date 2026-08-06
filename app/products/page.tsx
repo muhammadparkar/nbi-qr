@@ -5,16 +5,30 @@ import Link from "next/link";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { ArrowIcon, DotsMark, PageHero } from "../ui";
 import ceylonPack from "@/public/products/ceylon-mixture-front.jpeg";
-import cardamomPowderImg from "@/public/products/cardamom-powder.png";
-import clovesImg from "@/public/products/cloves.png";
-import mixedSpicePowderImg from "@/public/products/mixed-spice-powder.png";
-import mustardSeedsImg from "@/public/products/mustard-seeds.png";
-import ceylonCinnamonQuillsImg from "@/public/products/ceylon-cinnamon-quills.png";
-import cinnamonPowderImg from "@/public/products/cinnamon-powder.png";
-import fennelSeedsImg from "@/public/products/fennel-seeds.png";
-import corianderSeedsImg from "@/public/products/coriander-seeds.png";
-import bbqMasalaImg from "@/public/products/bbq-masala.png";
-import garlicPowderImg from "@/public/products/garlic-powder.png";
+import cardamomPowderImg from "@/public/products/cardamom-powder.jpg";
+import clovesImg from "@/public/products/cloves.jpg";
+import mixedSpicePowderImg from "@/public/products/mixed-spice-powder.jpg";
+import mustardSeedsImg from "@/public/products/mustard-seeds.jpg";
+import ceylonCinnamonQuillsImg from "@/public/products/ceylon-cinnamon-quills.jpg";
+import cinnamonPowderImg from "@/public/products/cinnamon-powder.jpg";
+import fennelSeedsImg from "@/public/products/fennel-seeds.jpg";
+import corianderSeedsImg from "@/public/products/coriander-seeds.jpg";
+import bbqMasalaImg from "@/public/products/bbq-masala.jpg";
+import garlicPowderImg from "@/public/products/garlic-powder.jpg";
+import fishCurryMixImg from "@/public/products/fish-curry-mix.jpg";
+import chickenMasalaImg from "@/public/products/chicken-masala.jpg";
+import curryPowderImg from "@/public/products/curry-powder.jpg";
+import roastedChilliPowderImg from "@/public/products/roasted-chilli-powder.jpg";
+import blackPepperPowderImg from "@/public/products/black-pepper-powder.jpg";
+import chilliPowderImg from "@/public/products/chilli-powder.jpg";
+import fenugreekSeedsImg from "@/public/products/fenugreek-seeds.jpg";
+import turmericPowderImg from "@/public/products/turmeric-powder.jpg";
+import cuminPowderImg from "@/public/products/cumin-powder.jpg";
+import garamMasalaImg from "@/public/products/garam-masala.jpg";
+import corianderPowderImg from "@/public/products/coriander-powder.jpg";
+import desiccatedCoconutImg from "@/public/products/desiccated-coconut.jpg";
+import coconutVinegarImg from "@/public/products/coconut-vinegar.jpg";
+import kashmiriChilliPowderImg from "@/public/products/kashmiri-chilli-powder.jpg";
 
 function CustomSelect({
   value,
@@ -102,15 +116,16 @@ const allProducts: {
   imgAlt: string;
 }[] = [
   // Spice Products (Powders)
-  { name: "Curry Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Curry powder" },
+  { name: "Curry Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: curryPowderImg, imgAlt: "NBI Premium Curry Powder" },
   { name: "Roasted Curry Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Roasted curry powder" },
-  { name: "Chilli Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=800&q=70", imgAlt: "Chilli powder" },
-  { name: "Roasted Chilli Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=800&q=70", imgAlt: "Roasted chilli powder" },
-  { name: "Turmeric Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Turmeric powder" },
-  { name: "Black Pepper Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Black pepper powder" },
+  { name: "Chilli Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: chilliPowderImg, imgAlt: "NBI Premium Chilli Powder" },
+  { name: "Roasted Chilli Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: roastedChilliPowderImg, imgAlt: "NBI Premium Roasted Chilli Powder" },
+  { name: "Kashmiri Chilli Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: kashmiriChilliPowderImg, imgAlt: "NBI Premium Kashmiri Chilli Powder" },
+  { name: "Turmeric Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: turmericPowderImg, imgAlt: "NBI Premium Turmeric Powder" },
+  { name: "Black Pepper Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: blackPepperPowderImg, imgAlt: "NBI Premium Black Pepper Powder" },
   { name: "White Pepper Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "White pepper powder" },
-  { name: "Coriander Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Coriander powder" },
-  { name: "Cumin Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Cumin powder" },
+  { name: "Coriander Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: corianderPowderImg, imgAlt: "NBI Premium Coriander Powder" },
+  { name: "Cumin Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: cuminPowderImg, imgAlt: "NBI Premium Cumin Powder" },
   { name: "Fennel Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Fennel powder" },
   { name: "Cinnamon Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: cinnamonPowderImg, imgAlt: "NBI Ceylon Cinnamon Powder" },
   { name: "Cardamom Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: cardamomPowderImg, imgAlt: "NBI Premium Cardamom Powder" },
@@ -128,27 +143,27 @@ const allProducts: {
   { name: "Cumin Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Cumin seeds" },
   { name: "Fennel Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: fennelSeedsImg, imgAlt: "NBI Premium Fennel Seeds" },
   { name: "Mustard Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: mustardSeedsImg, imgAlt: "NBI Premium Mustard Seeds" },
-  { name: "Fenugreek Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Fenugreek seeds" },
+  { name: "Fenugreek Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: fenugreekSeedsImg, imgAlt: "NBI Premium Fenugreek Seeds" },
   { name: "Dried Red Chilli", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=800&q=70", imgAlt: "Dried red chilli" },
   { name: "Bay Leaves", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1587131782738-de30ea91a542?w=800&q=70", imgAlt: "Bay leaves" },
 
   // Masala Range
-  { name: "Chicken Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Chicken masala" },
+  { name: "Chicken Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: chickenMasalaImg, imgAlt: "NBI Premium Chicken Masala" },
   { name: "Meat Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Meat masala" },
-  { name: "Fish Curry Mix", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Fish curry mix" },
+  { name: "Fish Curry Mix", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: fishCurryMixImg, imgAlt: "NBI Premium Fish Curry Mix" },
   { name: "Biryani Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Biryani masala" },
   { name: "BBQ Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: bbqMasalaImg, imgAlt: "NBI Premium BBQ Masala" },
-  { name: "Garam Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Garam masala" },
+  { name: "Garam Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: garamMasalaImg, imgAlt: "NBI Premium Mix Masala" },
   { name: "Tandoori Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Tandoori masala" },
   { name: "Sambar Powder", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Sambar powder" },
   { name: "Rasam Powder", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Rasam powder" },
 
   // Coconut Products
-  { name: "Desiccated Coconut", category: "Coconut Products", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Desiccated coconut" },
+  { name: "Desiccated Coconut", category: "Coconut Products", sizes: "Retail & bulk", img: desiccatedCoconutImg, imgAlt: "NBI Premium Desiccated Coconut" },
   { name: "Coconut Milk Powder", category: "Coconut Products", sizes: "200 g – 1 kg", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Coconut milk powder" },
   { name: "Coconut Cream", category: "Coconut Products", sizes: "200 ml – 1 L", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Coconut cream" },
   { name: "Virgin Coconut Oil", category: "Coconut Products", sizes: "500 ml · 1 L", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Virgin coconut oil" },
-  { name: "Coconut Vinegar", category: "Coconut Products", sizes: "500 ml · 1 L", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Coconut vinegar" },
+  { name: "Coconut Vinegar", category: "Coconut Products", sizes: "500 ml · 1 L", img: coconutVinegarImg, imgAlt: "NBI Premium Coconut Vinegar" },
 
   // Rice & Grains
   { name: "Basmati Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=70", imgAlt: "Basmati rice" },
