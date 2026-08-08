@@ -248,42 +248,60 @@ export default function Home() {
       {/* ============ OUR STORY (pinned horizontal storyline on desktop) ============ */}
       <section id="about" className="relative bg-nbidark text-white overflow-hidden">
         <div className="story-stage flex flex-col md:h-screen">
-          <div className="mx-auto w-full max-w-6xl px-5 pt-16 md:pt-24 pb-8 flex items-end justify-between gap-6">
+          <div className="mx-auto w-full max-w-6xl px-5 pt-20 md:pt-28 pb-8 flex items-end justify-between gap-6">
             <div>
               <p className="font-serif italic text-lg" style={{ color: "#FF5A4C" }}>
                 Scroll through four decades
               </p>
               <h2 className="mt-1 text-3xl md:text-4xl font-extrabold tracking-tight">Our Story</h2>
             </div>
-            <div className="hidden md:block w-48 h-1 rounded-full bg-white/15 overflow-hidden">
-              <div className="story-progress h-full w-full origin-left scale-x-0 bg-nbired" />
+            {/* Chapter markers along the progress rail, not just a bare bar */}
+            <div className="hidden md:flex flex-col items-end gap-2 w-56">
+              <div className="flex w-full justify-between px-0.5">
+                {storyChapters.map((ch) => (
+                  <span key={ch.year} className="text-[10px] font-bold uppercase tracking-widest text-nbicream/40">
+                    {ch.year}
+                  </span>
+                ))}
+              </div>
+              <div className="relative w-full h-1 rounded-full bg-white/15 overflow-hidden">
+                <div className="story-progress h-full w-full origin-left scale-x-0 bg-nbired" />
+              </div>
             </div>
           </div>
           <div className="story-track flex flex-col md:flex-row md:w-max md:flex-1">
-            {storyChapters.map((ch) => (
+            {storyChapters.map((ch, i) => (
               <article key={ch.year} className="story-panel md:w-screen md:shrink-0 md:flex md:items-center">
-                <div className="mx-auto w-full max-w-6xl px-5 py-12 md:py-0 grid md:grid-cols-2 gap-8 md:gap-14 items-center">
-                  <div className="relative">
-                    <span
-                      className="block font-extrabold tracking-tight text-7xl md:text-9xl leading-none text-white/10 select-none"
-                      aria-hidden="true"
-                    >
-                      {ch.year}
-                    </span>
-                    <p className="mt-4 font-serif italic text-lg" style={{ color: "#FF5A4C" }}>
+                <div className="mx-auto w-full max-w-6xl px-5 py-12 md:py-0 grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-8 md:gap-16 items-center">
+                  <div className={`relative ${i % 2 === 1 ? "md:order-2" : ""}`}>
+                    {/* Timeline rail: chapter dot + connecting line, replaces the oversized ghost numeral */}
+                    <div className="flex items-center gap-3">
+                      <span className="relative flex h-3 w-3 shrink-0 rounded-full bg-nbired shadow-[0_0_0_4px_rgba(198,58,42,0.2)]" />
+                      <span className="h-px flex-1 bg-white/15" />
+                      <span className="shrink-0 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-black uppercase tracking-widest text-nbicream/80">
+                        {ch.year}
+                      </span>
+                    </div>
+
+                    <p className="mt-6 font-serif italic text-lg" style={{ color: "#FF5A4C" }}>
                       {ch.kicker}
                     </p>
                     <h3 className="mt-2 text-2xl md:text-4xl font-extrabold tracking-tight">{ch.title}</h3>
                     <p className="mt-4 font-serif text-lg leading-relaxed text-nbicream/90 max-w-lg">{ch.body}</p>
+
+                    <span className="mt-6 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-nbicream/40">
+                      Chapter {i + 1} of {storyChapters.length}
+                    </span>
                   </div>
-                  <div className="relative h-56 md:h-80 rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
+                  <div className={`relative h-56 md:h-[26rem] rounded-3xl overflow-hidden border border-white/15 shadow-2xl ${i % 2 === 1 ? "md:order-1" : ""}`}>
                     <Image
                       src={ch.img}
                       alt={ch.imgAlt}
                       fill
-                      sizes="(min-width: 768px) 45vw, 100vw"
+                      sizes="(min-width: 768px) 50vw, 100vw"
                       className="object-cover"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-nbidark/40 via-transparent to-transparent" />
                   </div>
                 </div>
               </article>
