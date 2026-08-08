@@ -6,11 +6,19 @@ import gsap from "gsap";
 /** When the wipe starts revealing the page (seconds) — hero intro is timed against this. */
 export const PRELOADER_REVEAL = 2.1;
 
+const SEEN_KEY = "nbi-preloader-seen";
+
 export default function Preloader() {
   const ref = useRef<HTMLDivElement>(null);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
+    if (sessionStorage.getItem(SEEN_KEY)) {
+      setDone(true);
+      return;
+    }
+    sessionStorage.setItem(SEEN_KEY, "1");
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setDone(true);
       return;

@@ -29,6 +29,18 @@ import corianderPowderImg from "@/public/products/coriander-powder.jpg";
 import desiccatedCoconutImg from "@/public/products/desiccated-coconut.jpg";
 import coconutVinegarImg from "@/public/products/coconut-vinegar.jpg";
 import kashmiriChilliPowderImg from "@/public/products/kashmiri-chilli-powder.jpg";
+import fennelPowderImg from "@/public/products/fennel-powder.jpg";
+import meatMasalaImg from "@/public/products/meat-masala.jpg";
+import virginCoconutOilImg from "@/public/products/virgin-coconut-oil.jpg";
+import blackPepperImg from "@/public/products/black-pepper.jpg";
+import gingerPowderImg from "@/public/products/ginger-powder.jpg";
+import coconutCreamImg from "@/public/products/coconut-cream.jpg";
+import roastedCurryPowderImg from "@/public/products/roasted-curry-powder.jpg";
+import whitePepperPowderImg from "@/public/products/white-pepper-powder.jpg";
+import sambaRiceImg from "@/public/products/samba-rice.jpg";
+import redRiceImg from "@/public/products/red-rice.jpg";
+import basmatiRiceImg from "@/public/products/basmati-rice.jpg";
+import whiteRiceImg from "@/public/products/white-rice.jpg";
 
 function CustomSelect({
   value,
@@ -117,25 +129,25 @@ const allProducts: {
 }[] = [
   // Spice Products (Powders)
   { name: "Curry Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: curryPowderImg, imgAlt: "NBI Premium Curry Powder" },
-  { name: "Roasted Curry Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Roasted curry powder" },
+  { name: "Roasted Curry Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: roastedCurryPowderImg, imgAlt: "NBI Premium Roasted Curry Powder" },
   { name: "Chilli Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: chilliPowderImg, imgAlt: "NBI Premium Chilli Powder" },
   { name: "Roasted Chilli Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: roastedChilliPowderImg, imgAlt: "NBI Premium Roasted Chilli Powder" },
   { name: "Kashmiri Chilli Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: kashmiriChilliPowderImg, imgAlt: "NBI Premium Kashmiri Chilli Powder" },
   { name: "Turmeric Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: turmericPowderImg, imgAlt: "NBI Premium Turmeric Powder" },
   { name: "Black Pepper Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: blackPepperPowderImg, imgAlt: "NBI Premium Black Pepper Powder" },
-  { name: "White Pepper Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "White pepper powder" },
+  { name: "White Pepper Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: whitePepperPowderImg, imgAlt: "NBI Premium White Pepper Powder" },
   { name: "Coriander Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: corianderPowderImg, imgAlt: "NBI Premium Coriander Powder" },
   { name: "Cumin Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: cuminPowderImg, imgAlt: "NBI Premium Cumin Powder" },
-  { name: "Fennel Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Fennel powder" },
+  { name: "Fennel Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: fennelPowderImg, imgAlt: "NBI Premium Fennel Powder" },
   { name: "Cinnamon Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: cinnamonPowderImg, imgAlt: "NBI Ceylon Cinnamon Powder" },
   { name: "Cardamom Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: cardamomPowderImg, imgAlt: "NBI Premium Cardamom Powder" },
-  { name: "Ginger Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Ginger powder" },
+  { name: "Ginger Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: gingerPowderImg, imgAlt: "NBI Premium Ginger Powder" },
   { name: "Garlic Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: garlicPowderImg, imgAlt: "NBI Premium Garlic Powder" },
   { name: "Mixed Spice Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: mixedSpicePowderImg, imgAlt: "NBI Arabic Mixed Spice" },
 
   // Whole Spices
   { name: "Ceylon Cinnamon Quills", category: "Whole Spices", sizes: "Sticks · bulk", img: ceylonCinnamonQuillsImg, imgAlt: "NBI Premium Ceylon Cinnamon Quills" },
-  { name: "Black Pepper", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Black pepper" },
+  { name: "Black Pepper", category: "Whole Spices", sizes: "Whole · bulk", img: blackPepperImg, imgAlt: "NBI Premium Black Pepper Whole Peppercorns" },
   { name: "White Pepper", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "White pepper" },
   { name: "Cloves", category: "Whole Spices", sizes: "Whole · bulk", img: clovesImg, imgAlt: "NBI Premium Cloves" },
   { name: "Green Cardamom", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Green cardamom" },
@@ -149,7 +161,7 @@ const allProducts: {
 
   // Masala Range
   { name: "Chicken Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: chickenMasalaImg, imgAlt: "NBI Premium Chicken Masala" },
-  { name: "Meat Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Meat masala" },
+  { name: "Meat Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: meatMasalaImg, imgAlt: "NBI Premium Meat Masala" },
   { name: "Fish Curry Mix", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: fishCurryMixImg, imgAlt: "NBI Premium Fish Curry Mix" },
   { name: "Biryani Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Biryani masala" },
   { name: "BBQ Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: bbqMasalaImg, imgAlt: "NBI Premium BBQ Masala" },
@@ -161,15 +173,15 @@ const allProducts: {
   // Coconut Products
   { name: "Desiccated Coconut", category: "Coconut Products", sizes: "Retail & bulk", img: desiccatedCoconutImg, imgAlt: "NBI Premium Desiccated Coconut" },
   { name: "Coconut Milk Powder", category: "Coconut Products", sizes: "200 g – 1 kg", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Coconut milk powder" },
-  { name: "Coconut Cream", category: "Coconut Products", sizes: "200 ml – 1 L", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Coconut cream" },
-  { name: "Virgin Coconut Oil", category: "Coconut Products", sizes: "500 ml · 1 L", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Virgin coconut oil" },
+  { name: "Coconut Cream", category: "Coconut Products", sizes: "200 ml – 1 L", img: coconutCreamImg, imgAlt: "NBI Premium Coconut Cream" },
+  { name: "Virgin Coconut Oil", category: "Coconut Products", sizes: "500 ml · 1 L", img: virginCoconutOilImg, imgAlt: "NBI Premium Virgin Coconut Oil" },
   { name: "Coconut Vinegar", category: "Coconut Products", sizes: "500 ml · 1 L", img: coconutVinegarImg, imgAlt: "NBI Premium Coconut Vinegar" },
 
   // Rice & Grains
-  { name: "Basmati Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=70", imgAlt: "Basmati rice" },
-  { name: "Samba Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=70", imgAlt: "Samba rice" },
-  { name: "Red Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=70", imgAlt: "Red rice" },
-  { name: "White Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=70", imgAlt: "White rice" },
+  { name: "Basmati Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: basmatiRiceImg, imgAlt: "NBI Ceyba Basmati Rice" },
+  { name: "Samba Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: sambaRiceImg, imgAlt: "NBI Ceylon Samba Rice" },
+  { name: "Red Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: redRiceImg, imgAlt: "NBI Ceyba Red Rice" },
+  { name: "White Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: whiteRiceImg, imgAlt: "NBI Ceyba Premium White Rice" },
 
   // Pulses & Dry Foods
   { name: "Red Lentils", category: "Pulses & Dry Foods", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Red lentils" },
@@ -406,7 +418,7 @@ export default function ProductsPage() {
         </div>
 
         {/* Sticky filter bar */}
-        <div className="sticky top-[76px] z-20 -mx-5 px-5 py-4 bg-[#FBFAF7]/95 backdrop-blur-md border-b border-gray-200 mb-8">
+        <div className="-mx-5 px-5 py-4 bg-[#FBFAF7]/95 backdrop-blur-md border-b border-gray-200 mb-8">
           <div className="flex flex-col lg:flex-row lg:items-center gap-4">
             {/* Search */}
             <div className="relative w-full lg:max-w-xs shrink-0">
@@ -748,16 +760,16 @@ export default function ProductsPage() {
       {inquiryBag.length > 0 && (
         <button
           onClick={() => setBagOpen(true)}
-          className={`fixed bottom-6 right-6 z-40 bg-nbired text-white rounded-full p-4 md:p-5 shadow-2xl flex items-center gap-2.5 cursor-pointer transition-all hover:scale-105 ${
+          className={`fixed bottom-24 right-5 z-40 flex items-center justify-center w-14 h-14 rounded-full bg-nbired text-white shadow-lg hover:shadow-xl cursor-pointer transition-all hover:scale-105 ${
             pulseBag ? "animate-bounce" : ""
           }`}
-          aria-label="Open Quote Inquiry Bag"
+          aria-label={`Open Inquiry Bag (${inquiryBag.length} items)`}
         >
-          <svg className="w-5.5 h-5.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
           </svg>
-          <span className="font-extrabold text-sm tracking-wider">
-            Inquiry Bag ({inquiryBag.length})
+          <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-nbidark text-white text-[10px] font-extrabold">
+            {inquiryBag.length}
           </span>
         </button>
       )}
@@ -848,19 +860,29 @@ export default function ProductsPage() {
 
       {/* ============ PRODUCT DETAIL QUICK VIEW BACKDROP & CENTERED MODAL ============ */}
       {selectedProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 md:p-6">
           {/* Backdrop */}
           <div
             onClick={() => setSelectedProduct(null)}
             className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
           />
           {/* Centered Modal Container */}
-          <div className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl flex flex-col md:flex-row border border-gray-100 overflow-hidden max-h-[90vh] animate-scale-in">
-            {/* Left Column: Media & Specifications */}
-            <div className="w-full md:w-1/2 bg-gray-50/50 p-6 flex flex-col justify-between border-b md:border-b-0 md:border-r border-gray-100 overflow-y-auto max-h-[45vh] md:max-h-full">
-              <div className="space-y-4">
+          <div className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl flex flex-col md:flex-row border border-gray-100 overflow-hidden max-h-[92vh] md:max-h-[90vh] animate-scale-in">
+            {/* Close button — floats over image on mobile, avoids double-close controls */}
+            <button
+              onClick={() => setSelectedProduct(null)}
+              className="press absolute top-3 right-3 z-10 p-2 rounded-full bg-white/90 backdrop-blur shadow-md hover:bg-gray-100 text-nbidark cursor-pointer md:hidden"
+              aria-label="Close modal"
+            >
+              <CloseIcon />
+            </button>
+
+            {/* Single scroll container on mobile; two columns on desktop */}
+            <div className="w-full overflow-y-auto md:overflow-hidden flex flex-col md:flex-row">
+              {/* Left Column: Media & Specifications */}
+              <div className="w-full md:w-1/2 bg-gray-50/50 p-4 sm:p-6 flex flex-col border-b md:border-b-0 md:border-r border-gray-100 md:overflow-y-auto">
                 {/* Product preview image */}
-                <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-gray-200 bg-gray-50 shadow-inner">
+                <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full rounded-2xl overflow-hidden border border-gray-200 bg-gray-50 shadow-inner">
                   <Image
                     src={selectedProduct.img}
                     alt={selectedProduct.imgAlt}
@@ -870,7 +892,7 @@ export default function ProductsPage() {
                 </div>
 
                 {/* Specs list */}
-                <div className="space-y-3.5 pt-2">
+                <div className="space-y-3 pt-4">
                   <div className="border-b border-gray-100 pb-2">
                     <span className="text-[9px] font-bold text-nbisand uppercase tracking-wider block">Botanical Identification</span>
                     <p className="text-xs font-bold font-serif text-nbidark italic mt-0.5">
@@ -916,22 +938,20 @@ export default function ProductsPage() {
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Right Column: Custom Configuration Form & Actions */}
-            <div className="w-full md:w-1/2 p-6 flex flex-col justify-between overflow-y-auto max-h-[45vh] md:max-h-full">
-              <div>
+              {/* Right Column: Custom Configuration Form & Actions */}
+              <div className="w-full md:w-1/2 p-4 sm:p-6 flex flex-col md:overflow-y-auto">
                 {/* Header title */}
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <span className="inline-block rounded-full bg-nbigreen/10 border border-nbigreen/20 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-nbigreen">
                       {selectedProduct.category}
                     </span>
-                    <h3 className="text-xl font-black text-nbidark mt-1">{selectedProduct.name}</h3>
+                    <h3 className="text-lg sm:text-xl font-black text-nbidark mt-1">{selectedProduct.name}</h3>
                   </div>
                   <button
                     onClick={() => setSelectedProduct(null)}
-                    className="press p-2 rounded-full hover:bg-gray-100 text-nbidark cursor-pointer shrink-0 ml-2"
+                    className="press p-2 rounded-full hover:bg-gray-100 text-nbidark cursor-pointer shrink-0 ml-2 hidden md:block"
                     aria-label="Close modal"
                   >
                     <CloseIcon />
@@ -939,20 +959,38 @@ export default function ProductsPage() {
                 </div>
 
                 {/* Form configurations */}
-                <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4.5 space-y-4">
+                <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 space-y-4">
                   <span className="text-[10px] font-black text-nbigreen uppercase tracking-widest block">Configure Inquiry Specs</span>
-                  
+
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label htmlFor="modal-qty" className="text-[9px] font-bold text-nbisand uppercase tracking-wider block">Quantity</label>
-                      <input
-                        id="modal-qty"
-                        type="number"
-                        min="1"
-                        value={formQty}
-                        onChange={(e) => setFormQty(Math.max(1, parseInt(e.target.value) || 0))}
-                        className="mt-1 w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs font-bold text-nbidark focus:outline-none focus:ring-2 focus:ring-nbigreen"
-                      />
+                      <div className="mt-1 flex items-stretch rounded-xl border border-gray-300 bg-white overflow-hidden focus-within:ring-2 focus-within:ring-nbigreen">
+                        <button
+                          type="button"
+                          onClick={() => setFormQty((q) => Math.max(1, q - 1))}
+                          aria-label="Decrease quantity"
+                          className="press w-9 shrink-0 flex items-center justify-center text-nbidark font-black text-base hover:bg-gray-100 cursor-pointer"
+                        >
+                          −
+                        </button>
+                        <input
+                          id="modal-qty"
+                          type="number"
+                          min="1"
+                          value={formQty}
+                          onChange={(e) => setFormQty(Math.max(1, parseInt(e.target.value) || 0))}
+                          className="w-full min-w-0 text-center px-1 py-2.5 text-sm font-bold text-nbidark focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setFormQty((q) => q + 1)}
+                          aria-label="Increase quantity"
+                          className="press w-9 shrink-0 flex items-center justify-center text-nbidark font-black text-base hover:bg-gray-100 cursor-pointer"
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
                     <div>
                       <label className="text-[9px] font-bold text-nbisand uppercase tracking-wider block">Unit</label>
@@ -990,28 +1028,28 @@ export default function ProductsPage() {
                     />
                   </div>
                 </div>
-              </div>
 
-              {/* Action buttons */}
-              <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                <button
-                  onClick={() => {
-                    handleAddToBag(selectedProduct.name, formQty, formUnit, formPack);
-                    setSelectedProduct(null);
-                  }}
-                  className="press flex-1 bg-nbigreen text-white py-3.5 rounded-xl font-extrabold text-xs uppercase tracking-widest text-center cursor-pointer transition-colors hover:bg-[#00602f]"
-                >
-                  Add to Inquiry Bag
-                </button>
-                <button
-                  onClick={() => {
-                    setSelectedProduct(null);
-                    window.location.href = `/contact?items=- ${selectedProduct.name} (${formQty} ${formUnit} via ${formPack})`;
-                  }}
-                  className="press bg-gray-100 text-nbidark px-4 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest text-center cursor-pointer hover:bg-gray-200"
-                >
-                  Direct Inquiry
-                </button>
+                {/* Action buttons */}
+                <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                  <button
+                    onClick={() => {
+                      handleAddToBag(selectedProduct.name, formQty, formUnit, formPack);
+                      setSelectedProduct(null);
+                    }}
+                    className="press flex-1 bg-nbigreen text-white py-3.5 rounded-xl font-extrabold text-xs uppercase tracking-widest text-center cursor-pointer transition-colors hover:bg-[#00602f]"
+                  >
+                    Add to Inquiry Bag
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSelectedProduct(null);
+                      window.location.href = `/contact?items=- ${selectedProduct.name} (${formQty} ${formUnit} via ${formPack})`;
+                    }}
+                    className="press bg-gray-100 text-nbidark px-4 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest text-center cursor-pointer hover:bg-gray-200"
+                  >
+                    Direct Inquiry
+                  </button>
+                </div>
               </div>
             </div>
           </div>
