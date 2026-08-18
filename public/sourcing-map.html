@@ -62,9 +62,9 @@
 
   <script>
     // Sourcing Coordinates
-    var hqCoords = [8.3114, 80.4037]; // Anuradhapura (Negama)
+    var hqCoords = [7.2500, 80.5283]; // Kadugannawa, Kandy
     var locations = {
-      anuradhapura: { coords: hqCoords, zoom: 9, name: "Negama HQ & Processing" },
+      kadugannawa: { coords: hqCoords, zoom: 11, name: "Kadugannawa Heritage HQ" },
       galle: { coords: [6.0535, 80.2183], zoom: 10, name: "Galle Cinnamon Farms" },
       kandy: { coords: [7.2906, 80.6337], zoom: 11, name: "Kandy Garden Pepper" },
       matale: { coords: [7.4675, 80.6234], zoom: 11, name: "Matale Turmeric Crops" }
@@ -95,7 +95,7 @@
       iconAnchor: [6, 6]
     });
     hqMarker = L.marker(hqCoords, { icon: hqIcon }).addTo(map)
-      .bindTooltip("Negama HQ", { permanent: true, direction: 'top', className: 'custom-tooltip' });
+      .bindTooltip("Kadugannawa HQ", { permanent: true, direction: 'top', className: 'custom-tooltip' });
 
     // Handle postMessage Events from Parent React App
     window.addEventListener('message', function (event) {
@@ -125,7 +125,7 @@
       });
 
       // If it's not HQ itself, draw the route and animate tracer
-      if (id !== 'anuradhapura') {
+      if (id !== 'kadugannawa') {
         // Draw active destination marker
         var activeIcon = L.divIcon({
           className: 'pulse-icon',

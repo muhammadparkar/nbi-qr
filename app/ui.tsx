@@ -154,8 +154,18 @@ export function SiteFooter() {
           </nav>
         </div>
         <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-3 text-xs text-nbicream/60">
-          <p>© 2026 New Badriya Industries (PVT) LTD. All rights reserved.</p>
-          <p>Founded by Salahudeen Abdul Hameed · Negama, Anuradhapura District, Sri Lanka</p>
+          <p>© 2026 NBI HOLDING. All rights reserved.</p>
+          <p>
+            Sri Lankan Heritage | Quality Food Products | Global Opportunities · Est. 1987 ·{" "}
+            <a
+              href="https://en.wikipedia.org/wiki/Kadugannawa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline hover:text-white"
+            >
+              Kadugannawa, Kandy, Sri Lanka
+            </a>
+          </p>
         </div>
       </div>
     </footer>

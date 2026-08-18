@@ -42,6 +42,20 @@ import redRiceImg from "@/public/products/red-rice.jpg";
 import basmatiRiceImg from "@/public/products/basmati-rice.jpg";
 import whiteRiceImg from "@/public/products/white-rice.jpg";
 
+import greenTeaImg from "@/public/products/green-tea.png";
+import ceylonBlackTeaImg from "@/public/products/ceylon-black-tea.png";
+import biryaniMasalaImg from "@/public/products/biryani-masala.png";
+import ceylonCinnamonQuillsJarImg from "@/public/products/ceylon-cinnamon-quills.png";
+import roastedCurryPowderJarImg from "@/public/products/roasted-curry-powder.png";
+import cuminSeedsJarImg from "@/public/products/cumin-seeds.png";
+import corianderSeedsJarImg from "@/public/products/coriander-seeds.png";
+import clovesJarImg from "@/public/products/cloves.png";
+import cinnamonTeaImg from "@/public/products/cinnamon-tea.png";
+import lemonTeaImg from "@/public/products/lemon-tea.png";
+import mintTeaImg from "@/public/products/mint-tea.png";
+import teaBagsImg from "@/public/products/tea-bags.png";
+import coconutMilkPowderImg from "@/public/products/coconut-milk-powder.png";
+
 function CustomSelect({
   value,
   onChange,
@@ -72,7 +86,7 @@ function CustomSelect({
   const current = options.find((o) => o.value === value);
 
   return (
-    <div ref={ref} className={`relative ${className}`}>
+    <div ref={ref} className={`relative ${open ? "z-50" : "z-20"} ${className}`}>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
@@ -95,7 +109,7 @@ function CustomSelect({
         </svg>
       </button>
       {open && (
-        <div className="absolute right-0 z-30 mt-2 w-full min-w-[10rem] rounded-xl border border-gray-200 bg-white py-1.5 shadow-lg">
+        <div className="absolute right-0 z-50 mt-2 w-full min-w-[10rem] rounded-xl border border-gray-200 bg-white py-1.5 shadow-lg">
           {options.map((o) => (
             <button
               key={o.value}
@@ -119,7 +133,6 @@ function CustomSelect({
 
 
 
-// ponytail: Unsplash stock as preview filler — every image visually verified; swap for NBI product photography
 const allProducts: {
   name: string;
   category: string;
@@ -129,7 +142,7 @@ const allProducts: {
 }[] = [
   // Spice Products (Powders)
   { name: "Curry Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: curryPowderImg, imgAlt: "NBI Premium Curry Powder" },
-  { name: "Roasted Curry Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: roastedCurryPowderImg, imgAlt: "NBI Premium Roasted Curry Powder" },
+  { name: "Roasted Curry Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: roastedCurryPowderJarImg, imgAlt: "NBI Premium Roasted Curry Powder" },
   { name: "Chilli Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: chilliPowderImg, imgAlt: "NBI Premium Chilli Powder" },
   { name: "Roasted Chilli Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: roastedChilliPowderImg, imgAlt: "NBI Premium Roasted Chilli Powder" },
   { name: "Kashmiri Chilli Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: kashmiriChilliPowderImg, imgAlt: "NBI Premium Kashmiri Chilli Powder" },
@@ -146,33 +159,28 @@ const allProducts: {
   { name: "Mixed Spice Powder", category: "Spice Products", sizes: "50 g – 1 kg · bulk", img: mixedSpicePowderImg, imgAlt: "NBI Arabic Mixed Spice" },
 
   // Whole Spices
-  { name: "Ceylon Cinnamon Quills", category: "Whole Spices", sizes: "Sticks · bulk", img: ceylonCinnamonQuillsImg, imgAlt: "NBI Premium Ceylon Cinnamon Quills" },
+  { name: "Ceylon Cinnamon Quills", category: "Whole Spices", sizes: "Sticks · bulk", img: ceylonCinnamonQuillsJarImg, imgAlt: "NBI Premium Ceylon Cinnamon Quills" },
   { name: "Black Pepper", category: "Whole Spices", sizes: "Whole · bulk", img: blackPepperImg, imgAlt: "NBI Premium Black Pepper Whole Peppercorns" },
   { name: "White Pepper", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "White pepper" },
-  { name: "Cloves", category: "Whole Spices", sizes: "Whole · bulk", img: clovesImg, imgAlt: "NBI Premium Cloves" },
-  { name: "Green Cardamom", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=70", imgAlt: "Green cardamom" },
-  { name: "Coriander Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: corianderSeedsImg, imgAlt: "NBI Premium Coriander Seeds" },
-  { name: "Cumin Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Cumin seeds" },
+  { name: "Cloves", category: "Whole Spices", sizes: "Whole · bulk", img: clovesJarImg, imgAlt: "NBI Premium Cloves" },
+  { name: "Coriander Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: corianderSeedsJarImg, imgAlt: "NBI Premium Coriander Seeds" },
+  { name: "Cumin Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: cuminSeedsJarImg, imgAlt: "NBI Premium Cumin Seeds" },
   { name: "Fennel Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: fennelSeedsImg, imgAlt: "NBI Premium Fennel Seeds" },
   { name: "Mustard Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: mustardSeedsImg, imgAlt: "NBI Premium Mustard Seeds" },
   { name: "Fenugreek Seeds", category: "Whole Spices", sizes: "Whole · bulk", img: fenugreekSeedsImg, imgAlt: "NBI Premium Fenugreek Seeds" },
   { name: "Dried Red Chilli", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=800&q=70", imgAlt: "Dried red chilli" },
-  { name: "Bay Leaves", category: "Whole Spices", sizes: "Whole · bulk", img: "https://images.unsplash.com/photo-1587131782738-de30ea91a542?w=800&q=70", imgAlt: "Bay leaves" },
 
   // Masala Range
   { name: "Chicken Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: chickenMasalaImg, imgAlt: "NBI Premium Chicken Masala" },
   { name: "Meat Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: meatMasalaImg, imgAlt: "NBI Premium Meat Masala" },
   { name: "Fish Curry Mix", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: fishCurryMixImg, imgAlt: "NBI Premium Fish Curry Mix" },
-  { name: "Biryani Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70", imgAlt: "Biryani masala" },
+  { name: "Biryani Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: biryaniMasalaImg, imgAlt: "NBI Premium Biryani Masala" },
   { name: "BBQ Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: bbqMasalaImg, imgAlt: "NBI Premium BBQ Masala" },
   { name: "Garam Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: garamMasalaImg, imgAlt: "NBI Premium Mix Masala" },
-  { name: "Tandoori Masala", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70", imgAlt: "Tandoori masala" },
-  { name: "Sambar Powder", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Sambar powder" },
-  { name: "Rasam Powder", category: "Masala Range", sizes: "50 g – 1 kg · bulk", img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=70", imgAlt: "Rasam powder" },
 
   // Coconut Products
   { name: "Desiccated Coconut", category: "Coconut Products", sizes: "Retail & bulk", img: desiccatedCoconutImg, imgAlt: "NBI Premium Desiccated Coconut" },
-  { name: "Coconut Milk Powder", category: "Coconut Products", sizes: "200 g – 1 kg", img: "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?w=800&q=70", imgAlt: "Coconut milk powder" },
+  { name: "Coconut Milk Powder", category: "Coconut Products", sizes: "200 g – 1 kg", img: coconutMilkPowderImg, imgAlt: "NBI Premium Coconut Milk Powder" },
   { name: "Coconut Cream", category: "Coconut Products", sizes: "200 ml – 1 L", img: coconutCreamImg, imgAlt: "NBI Premium Coconut Cream" },
   { name: "Virgin Coconut Oil", category: "Coconut Products", sizes: "500 ml · 1 L", img: virginCoconutOilImg, imgAlt: "NBI Premium Virgin Coconut Oil" },
   { name: "Coconut Vinegar", category: "Coconut Products", sizes: "500 ml · 1 L", img: coconutVinegarImg, imgAlt: "NBI Premium Coconut Vinegar" },
@@ -183,20 +191,13 @@ const allProducts: {
   { name: "Red Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: redRiceImg, imgAlt: "NBI Ceyba Red Rice" },
   { name: "White Rice", category: "Rice & Grains", sizes: "Retail & bulk", img: whiteRiceImg, imgAlt: "NBI Ceyba Premium White Rice" },
 
-  // Pulses & Dry Foods
-  { name: "Red Lentils", category: "Pulses & Dry Foods", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Red lentils" },
-  { name: "Chickpeas", category: "Pulses & Dry Foods", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Chickpeas" },
-  { name: "Green Gram", category: "Pulses & Dry Foods", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Green gram" },
-  { name: "Cowpea", category: "Pulses & Dry Foods", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Cowpea" },
-  { name: "White Beans", category: "Pulses & Dry Foods", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "White beans" },
-  { name: "Green Peas", category: "Pulses & Dry Foods", sizes: "Retail & bulk", img: "https://images.unsplash.com/photo-1509912760195-4f6cfd8cce2c?w=800&q=70", imgAlt: "Green peas" },
-
   // Tea & Beverages
-  { name: "Ceylon Black Tea", category: "Tea & Beverages", sizes: "Loose leaf · gift packs", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Ceylon black tea" },
-  { name: "Green Tea", category: "Tea & Beverages", sizes: "Loose leaf · gift packs", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Green tea" },
-  { name: "Flavoured Tea", category: "Tea & Beverages", sizes: "Loose leaf · gift packs", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Flavoured tea" },
-  { name: "Tea Bags", category: "Tea & Beverages", sizes: "Box of 25 · 50 · 100", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Tea bags" },
-  { name: "Instant Coffee", category: "Tea & Beverages", sizes: "50 g – 500 g", img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=70", imgAlt: "Instant coffee" },
+  { name: "Ceylon Black Tea", category: "Tea & Beverages", sizes: "200 g pouch · bulk", img: ceylonBlackTeaImg, imgAlt: "NBI Ceyvana Pure Ceylon Black Tea" },
+  { name: "Green Tea", category: "Tea & Beverages", sizes: "200 g pouch · bulk", img: greenTeaImg, imgAlt: "NBI Ceyvana Pure Ceylon Green Tea" },
+  { name: "Cinnamon Tea", category: "Tea & Beverages", sizes: "200 g pouch", img: cinnamonTeaImg, imgAlt: "NBI Ceyvana Cinnamon Flavoured Ceylon Black Tea" },
+  { name: "Lemon Tea", category: "Tea & Beverages", sizes: "200 g pouch", img: lemonTeaImg, imgAlt: "NBI Ceyvana Lemon Flavoured Ceylon Black Tea" },
+  { name: "Mint Tea", category: "Tea & Beverages", sizes: "200 g pouch", img: mintTeaImg, imgAlt: "NBI Ceyvana Mint Flavoured Ceylon Black Tea" },
+  { name: "Tea Bags", category: "Tea & Beverages", sizes: "Box of 100 tea bags", img: teaBagsImg, imgAlt: "NBI Ceyvana Premium Ceylon Tea Bags" },
 
   // Retail flagship packs
   { name: "Ceylon Mixture", category: "Snacks", sizes: "100 g · 200 g", img: ceylonPack, imgAlt: "NBI Ceylon Mixture retail pack" },
@@ -341,7 +342,7 @@ export default function ProductsPage() {
         oil: "Capsaicin content 0.6% - 0.95%",
         potency: "45,000 - 85,000 SHU Scoville heat",
         moisture: "< 9.5% Moisture Max",
-        origin: "Anuradhapura Sourcing",
+        origin: "Kadugannawa / Hill Country Sourcing",
         profile: "Fierce, dry, bold heat with deep red glow."
       };
     }
@@ -351,7 +352,7 @@ export default function ProductsPage() {
         oil: "4.0% - 6.2% active curcuminoids",
         potency: "Rich curcumin active base",
         moisture: "< 10% Moisture Max",
-        origin: "Matale District Sourcing",
+        origin: "Matale / Kandy District Sourcing",
         profile: "Earthy, warm, woody fragrance, gold hue."
       };
     }
@@ -371,7 +372,7 @@ export default function ProductsPage() {
         oil: "Low fat, high crispy crunch retention",
         potency: "Prepared in hygiene certified units",
         moisture: "< 3.0% Moisture Max",
-        origin: "Anuradhapura Factory Production",
+        origin: "Kadugannawa Production Facility",
         profile: "Crisp, savory, seasoned with native herbs."
       };
     }
@@ -380,7 +381,7 @@ export default function ProductsPage() {
       oil: "Volatile oil values retained",
       potency: "Grade-A Export Specification",
       moisture: "Certified standard compliant",
-      origin: "Anuradhapura Main Factory",
+      origin: "NBI HOLDING Production Facility",
       profile: "Pure, natural, trace-audited food product."
     };
   };
@@ -418,7 +419,7 @@ export default function ProductsPage() {
         </div>
 
         {/* Sticky filter bar */}
-        <div className="-mx-5 px-5 py-4 bg-[#FBFAF7]/95 backdrop-blur-md border-b border-gray-200 mb-8">
+        <div className="relative z-30 -mx-5 px-5 py-4 bg-[#FBFAF7]/95 backdrop-blur-md border-b border-gray-200 mb-8">
           <div className="flex flex-col lg:flex-row lg:items-center gap-4">
             {/* Search */}
             <div className="relative w-full lg:max-w-xs shrink-0">
