@@ -77,7 +77,7 @@ const mapHotspots = [
     spice: "Heritage Origins & Hill Spices",
     notes: "The business began in Kadugannawa, Kandy, Sri Lanka. From its early beginnings, NBI has focused on developing and supplying quality food products while maintaining the authentic taste and traditions of Sri Lanka.",
     wiki: "https://en.wikipedia.org/wiki/Kadugannawa",
-    img: "https://images.unsplash.com/photo-1626132647523-66f5bf380027?w=800&q=70",
+    img: "https://images.unsplash.com/photo-1742067714285-32e27c32667b?q=80&w=1542&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: "galle",
@@ -87,7 +87,7 @@ const mapHotspots = [
     y: 335,
     spice: "Ceylon Cinnamon (Alba/C5)",
     notes: "The unique coastal soil and humid atmosphere in Galle yield high-grade Ceylon Cinnamon. Local family farmers hand-peel thin inner bark quills, preserving the delicate sweet aroma.",
-    img: "https://images.unsplash.com/photo-1608686207856-001b95cf60ca?w=800&q=70",
+    img: "https://images.unsplash.com/photo-1579989197111-928f586796a3?q=80&w=1736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: "kandy",
@@ -97,7 +97,7 @@ const mapHotspots = [
     y: 235,
     spice: "Black Pepper & Cardamom",
     notes: "Grown in biodiverse forest gardens alongside tea and spices, high-altitude black pepper possesses rich piperine levels and a sharp, citrus-pine finish.",
-    img: "https://images.unsplash.com/photo-1626132647523-66f5bf380027?w=800&q=70",
+    img: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=800&q=75",
   },
   {
     id: "matale",
@@ -107,7 +107,7 @@ const mapHotspots = [
     y: 195,
     spice: "Golden Turmeric",
     notes: "The volcanic-rich soils produce turmeric roots with exceptional curcumin content, offering deep gold coloration and potent quality.",
-    img: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=800&q=70",
+    img: "https://images.unsplash.com/photo-1677223625838-efaac01a5efb?q=80&w=1548&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
 
