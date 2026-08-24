@@ -10,6 +10,12 @@ import ceylonPack from "@/public/products/ceylon-mixture-pack.jpeg";
 
 import ceylonPouches from "@/public/products/ceylon-pouches.jpeg";
 import ceylonShelf from "@/public/products/ceylon-shelf.jpeg";
+import qualityAssuranceImg from "@/public/story/quality-assurance.jpg";
+import fmcgPortfolioImg from "@/public/story/fmcg-portfolio.jpg";
+import journeySourced from "@/public/journey/01-sourced.jpg";
+import journeyDriedRoasted from "@/public/journey/02-dried-roasted.jpg";
+import journeyMilledFresh from "@/public/journey/03-milled-fresh.jpg";
+import journeySealedShipped from "@/public/journey/04-sealed-shipped.jpg";
 
 // One product list split across the two marquee lines
 const marqueeItems = ["Curry Powder", "Roasted Chilli", "Ceylon Cinnamon", "Black Pepper", "Since 1987"];
@@ -51,39 +57,38 @@ const productCategories = [
   },
 ];
 
-// ponytail: Unsplash stock as preview filler — replace with real NBI farm/factory photos
 const journeySteps = [
   {
     n: "01",
     kicker: "Sri Lankan Heritage",
     title: "Sourced",
     body: "The business began in Kadugannawa, Kandy, Sri Lanka. From its early beginnings, NBI has focused on developing and supplying quality food products while maintaining authentic taste.",
-    img: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&q=70",
-    imgAlt: "Farmers shaking hands in a harvest field",
+    img: journeySourced,
+    imgAlt: "Sri Lankan spice farmer harvesting fresh crops in Kadugannawa hill country plantation",
   },
   {
     n: "02",
     kicker: "Preserving Tradition",
     title: "Crafted & Blended",
     body: "Over the years, NBI has developed strong expertise in spices, spice blends, and related food products, building a foundation based on quality, consistency, and customer trust.",
-    img: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=800&q=70",
-    imgAlt: "Red chillies laid out for drying",
+    img: journeyDriedRoasted,
+    imgAlt: "Sun-drying red chillies, cinnamon quills, cloves, and turmeric in traditional spice yard",
   },
   {
     n: "03",
     kicker: "Expanding Horizons",
     title: "FMCG & HORECA",
     body: "Supplying comprehensive food product lines to hotels, restaurants, cafés, catering companies, supermarkets, wholesalers, and business customers.",
-    img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&q=70",
-    imgAlt: "Freshly milled spice powders in spoons",
+    img: journeyMilledFresh,
+    imgAlt: "Modern low-temperature spice milling facility processing fresh curry powder and turmeric",
   },
   {
     n: "04",
     kicker: "Global Opportunities",
     title: "ARCO Qatar",
     body: "Through ARCO Trading & Marketing in Qatar, NBI HOLDING introduces authentic Sri Lankan products to the Qatar FMCG and HORECA markets.",
-    img: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=800&q=70",
-    imgAlt: "Shipping containers at an export port",
+    img: journeySealedShipped,
+    imgAlt: "Export packaging facility sealing cartons and pouches for Qatar dispatch",
   },
 ];
 
@@ -94,24 +99,24 @@ const storyChapters = [
     kicker: "The Heritage Begins",
     title: "It starts in Kadugannawa",
     body: "NBI HOLDING began its story in Kadugannawa, Kandy, Sri Lanka in 1987. From day one, the focus has been on developing and supplying quality food products while preserving authentic Sri Lankan traditions.",
-    img: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=1200&q=70" as const,
-    imgAlt: "Ground spices in spoons on a dark table",
+    img: "https://images.unsplash.com/photo-1642838776298-8e1b3d1a40ad?w=1200&q=75" as const,
+    imgAlt: "Kadugannawa hill country Sri Lanka",
   },
   {
     year: "1990s",
     kicker: "The Island Takes Notice",
     title: "Quality, Consistency & Trust",
     body: "NBI built strong expertise in spices, spice blends, teas, and food products — earning enduring trust among distributors, retailers, and food service partners.",
-    img: spiceRange,
-    imgAlt: "NBI retail spice range",
+    img: qualityAssuranceImg,
+    imgAlt: "NBI Quality assurance and spice testing laboratory",
   },
   {
     year: "2000s",
     kicker: "Expanding Portfolio",
     title: "Full FMCG Coverage",
     body: "Expanding beyond whole and ground spices into coconut products, Ceylon teas, rice & grains, snacks, and specialized HORECA lines.",
-    img: ceylonPouches,
-    imgAlt: "NBI kraft pouches with quality labelling",
+    img: fmcgPortfolioImg,
+    imgAlt: "NBI FMCG and HORECA food product range",
   },
   {
     year: "Today",
