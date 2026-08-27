@@ -5,7 +5,10 @@ import ContactForm from "./contact-form";
 import HeroSlider, { type Slide } from "./hero-slider";
 import { ArrowIcon, CheckItem, DotsMark } from "./ui";
 import heroRange from "@/public/products/hero-range.jpeg";
-import spiceRange from "@/public/products/spice-range.jpeg";
+import sevenJarRange from "@/public/products/seven-jar-range.jpg";
+import curryChiliCollection from "@/public/products/curry-chili-collection.jpg";
+import purePowdersCollection from "@/public/products/pure-powders-collection.jpg";
+import masalaBlendsCollection from "@/public/products/masala-blends-collection.jpg";
 import ceylonPack from "@/public/products/ceylon-mixture-pack.jpeg";
 
 import ceylonPouches from "@/public/products/ceylon-pouches.jpeg";
@@ -21,39 +24,30 @@ import journeySealedShipped from "@/public/journey/04-sealed-shipped.jpg";
 const marqueeItems = ["Curry Powder", "Roasted Chilli", "Ceylon Cinnamon", "Black Pepper", "Since 1987"];
 const marqueeItemsAlt = ["Turmeric", "Garam Masala", "Ceylon Mixture", "Ceylon Tea", "Custom Blends"];
 
-// ponytail: placeholder photos reused across categories for client preview — swap per-category shots later
 const productCategories = [
   {
     name: "Curry & Chili",
     accent: "red",
     note: "Deep roast, slow island burn.",
     items: ["Curry Powder", "Roasted Curry Powder", "Chili Powder", "Fish Curry Mix"],
-    img: heroRange,
-    imgAlt: "NBI chilli and curry powder packs",
+    img: curryChiliCollection,
+    imgAlt: "CEYRA Curry Powder, Roasted Curry Powder, Chilli Powder and Fish Curry Mix jars",
   },
   {
     name: "Pure Powders",
     accent: "green",
     note: "One origin. Nothing else added.",
     items: ["Black & White Pepper", "Turmeric Powder", "Coriander · Cumin", "Fennel Powder"],
-    img: spiceRange,
-    imgAlt: "NBI single-origin spice powder packs",
+    img: purePowdersCollection,
+    imgAlt: "CEYRA Black & White Pepper, Turmeric, Coriander-Cumin and Fennel Powder jars",
   },
   {
     name: "Masala Blends",
     accent: "red",
     note: "Blended like a family recipe.",
     items: ["Mixed & Garam Masala", "Meat Masala", "Chicken Masala", "Custom Spice Blends"],
-    img: ceylonPouches,
-    imgAlt: "NBI masala blend pouches",
-  },
-  {
-    name: "Signature Ceylon",
-    accent: "green",
-    note: "The name Ceylon earned.",
-    items: ["Ceylon Cinnamon", "Ceylon Tea", "Customized Packaging", "Private Label Options"],
-    img: ceylonShelf,
-    imgAlt: "NBI signature Ceylon product pouches on a shelf",
+    img: masalaBlendsCollection,
+    imgAlt: "CEYRA Black Pepper, Roasted Chilli, Turmeric and Mixed Spice Powder jars",
   },
 ];
 
@@ -335,8 +329,8 @@ export default function Home() {
 
           <figure className="reveal mt-12 rounded-3xl overflow-hidden bg-white border border-gray-200 shadow-sm">
             <Image
-              src={spiceRange}
-              alt="Seven NBI 200g spice packs: Cumin, Curry, Turmeric, Chilli, Black Pepper, Coriander and Kashmiri Chilli powders"
+              src={sevenJarRange}
+              alt="Seven NBI 200g spice jars: Cumin, Curry, Turmeric, Chilli, Black Pepper, Coriander and Kashmiri Chilli powders"
               className="w-full h-auto"
               placeholder="blur"
             />
@@ -345,7 +339,7 @@ export default function Home() {
             </figcaption>
           </figure>
 
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-4xl mx-auto">
             {productCategories.map((cat) => (
               <div
                 key={cat.name}
@@ -353,7 +347,7 @@ export default function Home() {
                   cat.accent === "red" ? "hover:border-nbired/40" : "hover:border-nbigreen/50"
                 }`}
               >
-                <div className="relative -mx-6 h-40 overflow-hidden">
+                <div className="relative -mx-6 aspect-[4/5] overflow-hidden">
                   <Image
                     src={cat.img}
                     alt={cat.imgAlt}
@@ -364,11 +358,6 @@ export default function Home() {
                   />
                 </div>
                 <h3 className="mt-4 font-extrabold text-lg">{cat.name}</h3>
-                <ul className="mt-3 space-y-1.5 text-sm text-nbicocoa/90">
-                  {cat.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
                 <p className="mt-4 pt-3 border-t border-gray-100 font-serif italic text-sm text-nbisand">{cat.note}</p>
               </div>
             ))}
